@@ -15,6 +15,7 @@
     <description>pet-doctor</description>
     <properties>
         <java.version>19</java.version>
+        <spring-boot-starter-data-jpa.version>2.7.5</spring-boot-starter-data-jpa.version>
     </properties>
     <dependencies>
         <dependency>
@@ -26,6 +27,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>${spring-boot-starter-data-jpa.version}</version>
         </dependency>
     </dependencies>
 
