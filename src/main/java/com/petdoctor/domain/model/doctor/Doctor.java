@@ -2,7 +2,6 @@ package com.petdoctor.domain.model.doctor;
 
 import com.petdoctor.domain.model.appointment.AppointmentInfo;
 
-import javax.persistence.*;
 import java.util.Set;
 
 public class Doctor implements DoctorInterface, DoctorInfo{
@@ -13,6 +12,15 @@ public class Doctor implements DoctorInterface, DoctorInfo{
     private Integer doctorOffice;
     private Set<AppointmentInfo> appointments;
 
+    public Doctor() { }
+
+    public Doctor(Long id, String name, String email, Integer doctorOffice, Set<AppointmentInfo> appointments) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.doctorOffice = doctorOffice;
+        this.appointments = appointments;
+    }
 
     @Override
     public Long getId() {
