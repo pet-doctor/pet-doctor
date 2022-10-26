@@ -30,6 +30,18 @@ public class ClientEntity {
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AppointmentEntity> appointments = new LinkedHashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "vet_clinic_entity_id")
+    private VetClinicEntity vetClinicEntity;
+
+    public VetClinicEntity getVetClinicEntity() {
+        return vetClinicEntity;
+    }
+
+    public void setVetClinicEntity(VetClinicEntity vetClinicEntity) {
+        this.vetClinicEntity = vetClinicEntity;
+    }
+
     public ClientEntity() {
     }
 

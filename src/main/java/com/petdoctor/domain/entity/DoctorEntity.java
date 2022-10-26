@@ -26,6 +26,18 @@ public class DoctorEntity {
     @OneToMany(mappedBy = "doctorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AppointmentEntity> appointmentEntities = new LinkedHashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "vet_clinic_entity_id")
+    private VetClinicEntity vetClinicEntity;
+
+    public VetClinicEntity getVetClinicEntity() {
+        return vetClinicEntity;
+    }
+
+    public void setVetClinicEntity(VetClinicEntity vetClinicEntity) {
+        this.vetClinicEntity = vetClinicEntity;
+    }
+
     public Set<AppointmentEntity> getAppointmentEntities() {
         return appointmentEntities;
     }
