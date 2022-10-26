@@ -24,6 +24,18 @@ public class AppointmentEntity {
     @JoinColumn(name = "client_id")
     private ClientEntity client;
 
+    @ManyToOne
+    @JoinColumn(name = "doctor_entity_id")
+    private DoctorEntity doctorEntity;
+
+    public DoctorEntity getDoctorEntity() {
+        return doctorEntity;
+    }
+
+    public void setDoctorEntity(DoctorEntity doctorEntity) {
+        this.doctorEntity = doctorEntity;
+    }
+
     public ClientEntity getClient() {
         return client;
     }
