@@ -2,7 +2,9 @@ package com.petdoctor.domain.model.doctor;
 
 import com.petdoctor.domain.model.appointment.Appointment;
 import com.petdoctor.domain.model.appointment.AppointmentInfo;
+import com.petdoctor.domain.model.appointment.AppointmentInterface;
 
+import java.util.Map;
 import java.util.Set;
 
 public interface DoctorInfo {
@@ -11,5 +13,5 @@ public interface DoctorInfo {
     String getName();
     String getEmail();
     Integer getDoctorOffice();
-    Set<AppointmentInfo> getAppointments();
+    Map<Long, AppointmentInfo>  getAppointments();
 }

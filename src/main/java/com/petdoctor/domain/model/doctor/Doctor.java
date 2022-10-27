@@ -3,6 +3,8 @@ package com.petdoctor.domain.model.doctor;
 import com.petdoctor.domain.model.appointment.AppointmentInfo;
 import com.petdoctor.domain.model.appointment.AppointmentInterface;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class Doctor implements DoctorInterface {
@@ -11,12 +13,12 @@ public class Doctor implements DoctorInterface {
     private String name;
     private String email;
     private Integer doctorOffice;
-    private Set<AppointmentInterface> appointments;
+    private Map<Long, AppointmentInterface> appointments;
 
     public Doctor() {
     }
 
-    public Doctor(Long id, String name, String email, Integer doctorOffice, Set<AppointmentInterface> appointments) {
+    public Doctor(Long id, String name, String email, Integer doctorOffice, Map<Long, AppointmentInterface> appointments) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -45,8 +47,8 @@ public class Doctor implements DoctorInterface {
     }
 
     @Override
-    public Set<AppointmentInfo> getAppointments() {
-        return Set.copyOf(this.appointments);
+    public Map<Long, AppointmentInfo> getAppointments() {
+        return Map.copyOf(this.appointments);
     }
 
     @Override
@@ -70,7 +72,7 @@ public class Doctor implements DoctorInterface {
     }
 
     @Override
-    public void setAppointments(Set<AppointmentInterface> appointments) {
+    public void setAppointments(Map<Long, AppointmentInterface> appointments) {
         this.appointments = appointments;
     }
 }
