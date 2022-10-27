@@ -18,4 +18,12 @@ public interface DoctorInterface extends DoctorInfo {
     void setDoctorOffice(Integer doctorOffice);
 
     void setAppointments(Map<Long, AppointmentInterface> appointments);
+
+    AppointmentInfo addAppointment(AppointmentInfo appointmentInfo);
+
+    AppointmentInfo bookAppointment(AppointmentInfo appointmentInfo);
+
+    AppointmentInfo closeAppointment(AppointmentInfo appointmentInfo);
+
+    void deleteAppointment(AppointmentInfo appointmentInfo);
 }

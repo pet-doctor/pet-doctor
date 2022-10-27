@@ -2,6 +2,7 @@ package com.petdoctor.domain.model.doctor;
 
 import com.petdoctor.domain.model.appointment.AppointmentInfo;
 import com.petdoctor.domain.model.appointment.AppointmentInterface;
+import com.petdoctor.domain.model.appointment.AppointmentState;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -74,5 +75,78 @@ public class Doctor implements DoctorInterface {
     @Override
     public void setAppointments(Map<Long, AppointmentInterface> appointments) {
         this.appointments = appointments;
+    }
+
+    @Override
+    public AppointmentInfo addAppointment(AppointmentInfo appointmentInfo) {
+        if (appointmentInfo == null) {
+            throw new RuntimeException("AppointmentInfo is null!");
+        }
+
+        if (!(appointmentInfo instanceof AppointmentInterface)) {
+            throw new RuntimeException("Incorrect type of AppointmentInfo was taken");
+        }
+
+        if (appointments.containsKey(appointmentInfo.getId())) {
+            throw new RuntimeException("Appointment has already added");
+        }
+
+        appointments.put(appointmentInfo.getId(), (AppointmentInterface) appointmentInfo);
+        return appointmentInfo;
+    }
+
+    @Override
+    public AppointmentInfo bookAppointment(AppointmentInfo appointmentInfo) {
+        if (appointmentInfo == null) {
+            throw new RuntimeException("AppointmentInfo is null!");
+        }
+
+        if (!(appointmentInfo instanceof AppointmentInterface)) {
+            throw new RuntimeException("Incorrect type of AppointmentInfo was taken");
+        }
+
+        if (!appointments.containsKey(appointmentInfo.getId())) {
+            throw new RuntimeException("Appointments doesn't contains the appointment");
+        }
+
+        ((AppointmentInterface) appointmentInfo).setAppointmentState(AppointmentState.TAKEN);
+        appointments.get(appointmentInfo.getId()).setAppointmentState(AppointmentState.TAKEN);
+        return appointmentInfo;
+    }
+
+    @Override
+    public AppointmentInfo closeAppointment(AppointmentInfo appointmentInfo) {
+        if (appointmentInfo == null) {
+            throw new RuntimeException("AppointmentInfo is null!");
+        }
+
+        if (!(appointmentInfo instanceof AppointmentInterface)) {
+            throw new RuntimeException("Incorrect type of AppointmentInfo was taken");
+        }
+
+        if (!appointments.containsKey(appointmentInfo.getId())) {
+            throw new RuntimeException("Appointments doesn't contains the appointment");
+        }
+
+        ((AppointmentInterface) appointmentInfo).setAppointmentState(AppointmentState.CLOSED);
+        appointments.get(appointmentInfo.getId()).setAppointmentState(AppointmentState.CLOSED);
+        return appointmentInfo;
+    }
+
+    @Override
+    public void deleteAppointment(AppointmentInfo appointmentInfo) {
+        if (appointmentInfo == null) {
+            throw new RuntimeException("AppointmentInfo is null!");
+        }
+
+        if (!(appointmentInfo instanceof AppointmentInterface)) {
+            throw new RuntimeException("Incorrect type of AppointmentInfo was taken");
+        }
+
+        if (!appointments.containsKey(appointmentInfo.getId())) {
+            throw new RuntimeException("Appointments doesn't contains the appointment");
+        }
+
+        appointments.remove(appointmentInfo.getId());
     }
 }
