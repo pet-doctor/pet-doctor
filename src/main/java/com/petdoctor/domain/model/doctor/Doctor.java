@@ -1,20 +1,22 @@
 package com.petdoctor.domain.model.doctor;
 
 import com.petdoctor.domain.model.appointment.AppointmentInfo;
+import com.petdoctor.domain.model.appointment.AppointmentInterface;
 
 import java.util.Set;
 
-public class Doctor implements DoctorInterface, DoctorInfo{
+public class Doctor implements DoctorInterface {
 
     private Long id;
     private String name;
     private String email;
     private Integer doctorOffice;
-    private Set<AppointmentInfo> appointments;
+    private Set<AppointmentInterface> appointments;
 
-    public Doctor() { }
+    public Doctor() {
+    }
 
-    public Doctor(Long id, String name, String email, Integer doctorOffice, Set<AppointmentInfo> appointments) {
+    public Doctor(Long id, String name, String email, Integer doctorOffice, Set<AppointmentInterface> appointments) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -68,7 +70,7 @@ public class Doctor implements DoctorInterface, DoctorInfo{
     }
 
     @Override
-    public void setAppointments(Set<AppointmentInfo> appointments) {
+    public void setAppointments(Set<AppointmentInterface> appointments) {
         this.appointments = appointments;
     }
 }

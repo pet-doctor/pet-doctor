@@ -5,7 +5,7 @@ import com.petdoctor.domain.model.doctor.DoctorInfo;
 
 import java.time.LocalDate;
 
-public class Appointment implements AppointmentInterface, AppointmentInfo{
+public class Appointment implements AppointmentInterface {
 
     private Long id;
     private LocalDate startTime;
@@ -13,7 +13,8 @@ public class Appointment implements AppointmentInterface, AppointmentInfo{
     private ClientInfo client;
     private DoctorInfo doctor;
 
-    public Appointment() { }
+    public Appointment() {
+    }
 
     public Appointment(Long id, LocalDate startTime, AppointmentState appointmentState, ClientInfo clientInfo, DoctorInfo doctor) {
         this.id = id;

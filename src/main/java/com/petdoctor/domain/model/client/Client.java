@@ -1,6 +1,6 @@
 package com.petdoctor.domain.model.client;
 
-public class Client implements ClientInterface, ClientInfo{
+public class Client implements ClientInterface {
 
     private Long id;
     private String name;
@@ -9,7 +9,8 @@ public class Client implements ClientInterface, ClientInfo{
     private String petName;
     private String petProblem;
 
-    public Client() { }
+    public Client() {
+    }
 
     public Client(Long id, String name, String surname, String email, String petName, String petProblem) {
 
