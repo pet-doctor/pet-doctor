@@ -3,7 +3,9 @@ package com.petdoctor.domain.model.doctor;
 import com.petdoctor.domain.model.appointment.AppointmentInfo;
 import com.petdoctor.domain.model.appointment.AppointmentInterface;
 import com.petdoctor.domain.model.appointment.AppointmentState;
+import com.petdoctor.domain.tool.exception.VetClinicValidationException;
 
+import javax.xml.bind.ValidationException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -81,11 +83,11 @@ public class Doctor implements DoctorInterface {
     public AppointmentInfo addAppointment(AppointmentInfo appointmentInfo) {
 
         if (!(appointmentInfo instanceof AppointmentInterface)) {
-            throw new RuntimeException("Incorrect type of Appointment was taken");
+            throw new VetClinicValidationException("Incorrect type of Appointment was taken");
         }
 
         if (appointments.containsKey(appointmentInfo.getId())) {
-            throw new RuntimeException("Appointment has already added");
+            throw new VetClinicValidationException("Appointment has already added");
         }
 
         appointments.put(appointmentInfo.getId(), (AppointmentInterface) appointmentInfo);
@@ -96,11 +98,11 @@ public class Doctor implements DoctorInterface {
     public AppointmentInfo bookAppointment(AppointmentInfo appointmentInfo) {
 
         if (!(appointmentInfo instanceof AppointmentInterface)) {
-            throw new RuntimeException("Incorrect type of Appointment was taken");
+            throw new VetClinicValidationException("Incorrect type of Appointment was taken");
         }
 
         if (!appointments.containsKey(appointmentInfo.getId())) {
-            throw new RuntimeException("Appointments doesn't contains the appointment");
+            throw new VetClinicValidationException("Appointments doesn't contains the appointment");
         }
 
         ((AppointmentInterface) appointmentInfo).setAppointmentState(AppointmentState.TAKEN);
@@ -112,11 +114,11 @@ public class Doctor implements DoctorInterface {
     public AppointmentInfo closeAppointment(AppointmentInfo appointmentInfo) {
 
         if (!(appointmentInfo instanceof AppointmentInterface)) {
-            throw new RuntimeException("Incorrect type of Appointment was taken");
+            throw new VetClinicValidationException("Incorrect type of Appointment was taken");
         }
 
         if (!appointments.containsKey(appointmentInfo.getId())) {
-            throw new RuntimeException("Appointments doesn't contains the appointment");
+            throw new VetClinicValidationException("Appointments doesn't contains the appointment");
         }
 
         ((AppointmentInterface) appointmentInfo).setAppointmentState(AppointmentState.CLOSED);
@@ -128,11 +130,11 @@ public class Doctor implements DoctorInterface {
     public void deleteAppointment(AppointmentInfo appointmentInfo) {
 
         if (!(appointmentInfo instanceof AppointmentInterface)) {
-            throw new RuntimeException("Incorrect type of Appointment was taken");
+            throw new VetClinicValidationException("Incorrect type of Appointment was taken");
         }
 
         if (!appointments.containsKey(appointmentInfo.getId())) {
-            throw new RuntimeException("Appointments doesn't contains the appointment");
+            throw new VetClinicValidationException("Appointments doesn't contains the appointment");
         }
 
         appointments.remove(appointmentInfo.getId());

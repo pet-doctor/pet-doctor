@@ -1,4 +1,6 @@
 package com.petdoctor.domain.service.impl;
 
-public class DoctorServiceImpl {
+import com.petdoctor.domain.service.DoctorService;
+
+public class DoctorServiceImpl implements DoctorService {
 }

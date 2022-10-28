@@ -5,6 +5,8 @@ import com.petdoctor.domain.model.client.ClientInfo;
 import com.petdoctor.domain.model.client.ClientInterface;
 import com.petdoctor.domain.model.doctor.DoctorInfo;
 import com.petdoctor.domain.model.doctor.DoctorInterface;
+import com.petdoctor.domain.tool.exception.VetClinicNullException;
+import com.petdoctor.domain.tool.exception.VetClinicValidationException;
 
 import java.util.Map;
 
@@ -56,17 +58,17 @@ public class VetClinic implements VetClinicInterface {
     public AppointmentInfo closeAppointment(AppointmentInfo appointmentInfo) {
 
         if (appointmentInfo == null) {
-            throw new RuntimeException("AppointmentInfo is null!");
+            throw new VetClinicNullException("AppointmentInfo is null!");
         }
 
         if (!(appointmentInfo.getDoctor() instanceof DoctorInterface)) {
-            throw new RuntimeException("Incorrect type of AppointmentInfo was taken");
+            throw new VetClinicValidationException("Incorrect type of AppointmentInfo was taken");
         }
 
         DoctorInterface doctor = doctors.get(appointmentInfo.getDoctor().getId());
 
         if (doctor == null) {
-            throw new RuntimeException("Related doctor isn't exist");
+            throw new VetClinicNullException("Related doctor isn't exist");
         }
 
         AppointmentInfo appointmentInfoResult = doctor.closeAppointment(appointmentInfo);
@@ -77,17 +79,17 @@ public class VetClinic implements VetClinicInterface {
     public AppointmentInfo bookAppointment(AppointmentInfo appointmentInfo) {
 
         if (appointmentInfo == null) {
-            throw new RuntimeException("AppointmentInfo is null!");
+            throw new VetClinicNullException("AppointmentInfo is null!");
         }
 
         if (!(appointmentInfo.getDoctor() instanceof DoctorInterface)) {
-            throw new RuntimeException("Incorrect type of AppointmentInfo was taken");
+            throw new VetClinicValidationException("Incorrect type of AppointmentInfo was taken");
         }
 
         DoctorInterface doctor = doctors.get(appointmentInfo.getDoctor().getId());
 
         if (doctor == null) {
-            throw new RuntimeException("Related doctor isn't exist");
+            throw new VetClinicNullException("Related doctor isn't exist");
         }
 
         AppointmentInfo appointmentInfoResult = doctor.bookAppointment(appointmentInfo);
@@ -98,17 +100,17 @@ public class VetClinic implements VetClinicInterface {
     public AppointmentInfo addAppointment(AppointmentInfo appointmentInfo) {
 
         if (appointmentInfo == null) {
-            throw new RuntimeException("AppointmentInfo is null!");
+            throw new VetClinicNullException("AppointmentInfo is null!");
         }
 
         if (!(appointmentInfo.getDoctor() instanceof DoctorInterface)) {
-            throw new RuntimeException("Incorrect type of AppointmentInfo was taken");
+            throw new VetClinicValidationException("Incorrect type of AppointmentInfo was taken");
         }
 
         DoctorInterface doctor = doctors.get(appointmentInfo.getDoctor().getId());
 
         if (doctor == null) {
-            throw new RuntimeException("Related doctor isn't exist");
+            throw new VetClinicNullException("Related doctor isn't exist");
         }
 
         AppointmentInfo appointmentInfoResult = doctor.addAppointment(appointmentInfo);
@@ -119,17 +121,17 @@ public class VetClinic implements VetClinicInterface {
     public void deleteAppointment(AppointmentInfo appointmentInfo) {
 
         if (appointmentInfo == null) {
-            throw new RuntimeException("AppointmentInfo is null!");
+            throw new VetClinicNullException("AppointmentInfo is null!");
         }
 
         if (!(appointmentInfo.getDoctor() instanceof DoctorInterface)) {
-            throw new RuntimeException("Incorrect type of AppointmentInfo was taken");
+            throw new VetClinicValidationException("Incorrect type of AppointmentInfo was taken");
         }
 
         DoctorInterface doctor = doctors.get(appointmentInfo.getDoctor().getId());
 
         if (doctor == null) {
-            throw new RuntimeException("Related doctor isn't exist");
+            throw new VetClinicNullException("Related doctor isn't exist");
         }
 
         doctor.deleteAppointment(appointmentInfo);
@@ -139,15 +141,15 @@ public class VetClinic implements VetClinicInterface {
     public DoctorInfo addDoctor(DoctorInfo doctor) {
 
         if (doctor == null) {
-            throw new RuntimeException("Doctor is null! :(");
+            throw new VetClinicNullException("Doctor is null! :(");
         }
 
         if (!(doctor instanceof DoctorInterface doctorInterface)) {
-            throw new RuntimeException("Incorrect type of Doctor was taken");
+            throw new VetClinicValidationException("Incorrect type of Doctor was taken");
         }
 
         if (doctors.containsKey(doctorInterface.getId())) {
-            throw new RuntimeException("Doctor has already added");
+            throw new VetClinicValidationException("Doctor has already added");
         }
 
         doctors.put(doctorInterface.getId(), doctorInterface);
@@ -158,15 +160,15 @@ public class VetClinic implements VetClinicInterface {
     public ClientInfo addClient(ClientInfo client) {
 
         if (client == null) {
-            throw new RuntimeException("Client is null! :(");
+            throw new VetClinicNullException("Client is null! :(");
         }
 
         if (!(client instanceof ClientInterface clientInterface)) {
-            throw new RuntimeException("Incorrect type of Client was taken");
+            throw new VetClinicValidationException("Incorrect type of Client was taken");
         }
 
         if (clients.containsKey(clientInterface.getId())) {
-            throw new RuntimeException("Client has already added");
+            throw new VetClinicValidationException("Client has already added");
         }
 
         clients.put(clientInterface.getId(), clientInterface);
