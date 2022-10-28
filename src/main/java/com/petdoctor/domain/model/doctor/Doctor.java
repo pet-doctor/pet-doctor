@@ -79,12 +79,9 @@ public class Doctor implements DoctorInterface {
 
     @Override
     public AppointmentInfo addAppointment(AppointmentInfo appointmentInfo) {
-        if (appointmentInfo == null) {
-            throw new RuntimeException("AppointmentInfo is null!");
-        }
 
         if (!(appointmentInfo instanceof AppointmentInterface)) {
-            throw new RuntimeException("Incorrect type of AppointmentInfo was taken");
+            throw new RuntimeException("Incorrect type of Appointment was taken");
         }
 
         if (appointments.containsKey(appointmentInfo.getId())) {
@@ -97,12 +94,9 @@ public class Doctor implements DoctorInterface {
 
     @Override
     public AppointmentInfo bookAppointment(AppointmentInfo appointmentInfo) {
-        if (appointmentInfo == null) {
-            throw new RuntimeException("AppointmentInfo is null!");
-        }
 
         if (!(appointmentInfo instanceof AppointmentInterface)) {
-            throw new RuntimeException("Incorrect type of AppointmentInfo was taken");
+            throw new RuntimeException("Incorrect type of Appointment was taken");
         }
 
         if (!appointments.containsKey(appointmentInfo.getId())) {
@@ -116,12 +110,9 @@ public class Doctor implements DoctorInterface {
 
     @Override
     public AppointmentInfo closeAppointment(AppointmentInfo appointmentInfo) {
-        if (appointmentInfo == null) {
-            throw new RuntimeException("AppointmentInfo is null!");
-        }
 
         if (!(appointmentInfo instanceof AppointmentInterface)) {
-            throw new RuntimeException("Incorrect type of AppointmentInfo was taken");
+            throw new RuntimeException("Incorrect type of Appointment was taken");
         }
 
         if (!appointments.containsKey(appointmentInfo.getId())) {
@@ -135,12 +126,9 @@ public class Doctor implements DoctorInterface {
 
     @Override
     public void deleteAppointment(AppointmentInfo appointmentInfo) {
-        if (appointmentInfo == null) {
-            throw new RuntimeException("AppointmentInfo is null!");
-        }
 
         if (!(appointmentInfo instanceof AppointmentInterface)) {
-            throw new RuntimeException("Incorrect type of AppointmentInfo was taken");
+            throw new RuntimeException("Incorrect type of Appointment was taken");
         }
 
         if (!appointments.containsKey(appointmentInfo.getId())) {
