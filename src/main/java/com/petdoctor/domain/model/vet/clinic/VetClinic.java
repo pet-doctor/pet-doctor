@@ -28,6 +28,31 @@ public class VetClinic implements VetClinicInterface {
     }
 
     @Override
+    public Long getId() {
+        return this.id;
+    }
+
+    @Override
+    public String getAddress() {
+        return this.address;
+    }
+
+    @Override
+    public String getEmail() {
+        return this.email;
+    }
+
+    @Override
+    public Map<Long, DoctorInfo> getDoctors() {
+        return Map.copyOf(this.doctors);
+    }
+
+    @Override
+    public Map<Long, ClientInfo> getClients() {
+        return Map.copyOf(this.clients);
+    }
+
+    @Override
     public AppointmentInfo closeAppointment(AppointmentInfo appointmentInfo) {
 
         if (appointmentInfo == null) {

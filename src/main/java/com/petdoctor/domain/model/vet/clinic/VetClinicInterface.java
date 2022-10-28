@@ -7,7 +7,7 @@ import com.petdoctor.domain.model.doctor.Doctor;
 import com.petdoctor.domain.model.doctor.DoctorInfo;
 import com.petdoctor.domain.model.doctor.DoctorInterface;
 
-public interface VetClinicInterface {
+public interface VetClinicInterface extends VetClinicInfo{
 
     AppointmentInfo closeAppointment(AppointmentInfo appointmentInfo);
 

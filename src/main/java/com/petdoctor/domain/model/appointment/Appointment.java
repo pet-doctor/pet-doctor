@@ -2,6 +2,7 @@ package com.petdoctor.domain.model.appointment;
 
 import com.petdoctor.domain.model.client.ClientInfo;
 import com.petdoctor.domain.model.doctor.DoctorInfo;
+import com.petdoctor.domain.model.vet.clinic.VetClinicInfo;
 
 import java.time.LocalDate;
 
@@ -12,6 +13,7 @@ public class Appointment implements AppointmentInterface {
     private AppointmentState appointmentState;
     private ClientInfo client;
     private DoctorInfo doctor;
+    private VetClinicInfo vetClinic;
 
     public Appointment() {
     }
@@ -50,6 +52,11 @@ public class Appointment implements AppointmentInterface {
     }
 
     @Override
+    public VetClinicInfo getVetClinic() {
+        return this.vetClinic;
+    }
+
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -72,5 +79,10 @@ public class Appointment implements AppointmentInterface {
     @Override
     public void setDoctor(DoctorInfo doctor) {
         this.doctor = doctor;
+    }
+
+    @Override
+    public void setVetClinic(VetClinicInfo vetClinic) {
+        this.vetClinic = vetClinic;
     }
 }
