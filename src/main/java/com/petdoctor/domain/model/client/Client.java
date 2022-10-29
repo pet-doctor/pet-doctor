@@ -13,7 +13,6 @@ public class Client implements ClientInterface {
     }
 
     public Client(Long id, String name, String surname, String email, String petName, String petProblem) {
-
         this.id = id;
         this.name = name;
         this.surname = surname;
