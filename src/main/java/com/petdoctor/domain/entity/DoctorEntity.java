@@ -1,8 +1,8 @@
 package com.petdoctor.domain.entity;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class DoctorEntity {
@@ -24,7 +24,7 @@ public class DoctorEntity {
     private Integer doctorOffice;
 
     @OneToMany(mappedBy = "doctorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AppointmentEntity> appointmentEntities = new LinkedHashSet<>();
+    private List<AppointmentEntity> appointmentEntities = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "vet_clinic_entity_id")
@@ -38,11 +38,11 @@ public class DoctorEntity {
         this.vetClinicEntity = vetClinicEntity;
     }
 
-    public Set<AppointmentEntity> getAppointmentEntities() {
+    public List<AppointmentEntity> getAppointmentEntities() {
         return appointmentEntities;
     }
 
-    public void setAppointmentEntities(Set<AppointmentEntity> appointmentEntities) {
+    public void setAppointmentEntities(List<AppointmentEntity> appointmentEntities) {
         this.appointmentEntities = appointmentEntities;
     }
 

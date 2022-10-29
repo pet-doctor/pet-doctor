@@ -1,8 +1,8 @@
 package com.petdoctor.domain.entity;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class VetClinicEntity {
@@ -18,24 +18,24 @@ public class VetClinicEntity {
     private String email;
 
     @OneToMany(mappedBy = "vetClinicEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ClientEntity> clientEntities = new LinkedHashSet<>();
+    private List<ClientEntity> clientEntities = new ArrayList<>();
 
     @OneToMany(mappedBy = "vetClinicEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<DoctorEntity> doctorEntities = new LinkedHashSet<>();
+    private List<DoctorEntity> doctorEntities = new ArrayList<>();
 
-    public Set<DoctorEntity> getDoctorEntities() {
+    public List<DoctorEntity> getDoctorEntities() {
         return doctorEntities;
     }
 
-    public void setDoctorEntities(Set<DoctorEntity> doctorEntities) {
+    public void setDoctorEntities(List<DoctorEntity> doctorEntities) {
         this.doctorEntities = doctorEntities;
     }
 
-    public Set<ClientEntity> getClientEntities() {
+    public List<ClientEntity> getClientEntities() {
         return clientEntities;
     }
 
-    public void setClientEntities(Set<ClientEntity> clientEntities) {
+    public void setClientEntities(List<ClientEntity> clientEntities) {
         this.clientEntities = clientEntities;
     }
 

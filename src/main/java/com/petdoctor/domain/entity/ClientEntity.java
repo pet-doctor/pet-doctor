@@ -1,8 +1,8 @@
 package com.petdoctor.domain.entity;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class ClientEntity {
@@ -28,7 +28,7 @@ public class ClientEntity {
     private String petProblem;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AppointmentEntity> appointments = new LinkedHashSet<>();
+    private List<AppointmentEntity> appointments = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "vet_clinic_entity_id")
@@ -51,7 +51,7 @@ public class ClientEntity {
                         String email,
                         String pet,
                         String petProblem,
-                        Set<AppointmentEntity> appointments) {
+                        List<AppointmentEntity> appointments) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -109,11 +109,11 @@ public class ClientEntity {
         this.petProblem = petProblem;
     }
 
-    public Set<AppointmentEntity> getAppointments() {
+    public List<AppointmentEntity> getAppointments() {
         return appointments;
     }
 
-    public void setAppointments(Set<AppointmentEntity> appointments) {
+    public void setAppointments(List<AppointmentEntity> appointments) {
         this.appointments = appointments;
     }
 }
