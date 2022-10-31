@@ -1,6 +1,5 @@
 package com.petdoctor.domain.service;
 
-import com.petdoctor.domain.dto.AppointmentDto;
 import com.petdoctor.domain.dto.ClientDto;
 
 import java.util.List;
