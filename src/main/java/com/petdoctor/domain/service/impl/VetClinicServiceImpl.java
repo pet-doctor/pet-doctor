@@ -1,5 +1,6 @@
 package com.petdoctor.domain.service.impl;
 
+import com.petdoctor.domain.dto.VetClinicDto;
 import com.petdoctor.domain.model.appointment.Appointment;
 import com.petdoctor.domain.model.appointment.AppointmentInfo;
 import com.petdoctor.domain.model.doctor.DoctorInfo;
@@ -32,5 +33,25 @@ public class VetClinicServiceImpl implements VetClinicService {
 //        TODO: add mapping with @Entities
 
         return vetClinic.bookAppointment(appointment);
+    }
+
+    @Override
+    public VetClinicDto getVetClinicById(Long id) {
+        return null;
+    }
+
+    @Override
+    public VetClinicDto saveVetClinic(VetClinicDto vetClinicDto) {
+        return null;
+    }
+
+    @Override
+    public VetClinicDto updateVetClinic(VetClinicDto vetClinicDto) {
+        return null;
+    }
+
+    @Override
+    public void deleteVetClinicById(Long id) {
+
     }
 }
