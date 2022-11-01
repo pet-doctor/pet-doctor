@@ -1,8 +1,8 @@
 package com.petdoctor.domain.tool.exception;
 
-public class VetClinicNullException extends RuntimeException{
+public class PetDoctorNullException extends RuntimeException{
 
-    public VetClinicNullException(String message) {
+    public PetDoctorNullException(String message) {
         super("Null pointer exception occurred by: " + message);
     }
 }
