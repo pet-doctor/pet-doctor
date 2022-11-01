@@ -1,12 +1,12 @@
 package com.petdoctor.domain.dto;
 
 public class ClientDto {
-    private Long id;
-    private String name;
-    private String surname;
-    private String email;
-    private String petName;
-    private String petProblem;
+    final private Long id;
+    final private String name;
+    final private String surname;
+    final private String email;
+    final private String petName;
+    final private String petProblem;
 
 
     public ClientDto(Long id, String name, String surname, String email, String petName, String petProblem) {

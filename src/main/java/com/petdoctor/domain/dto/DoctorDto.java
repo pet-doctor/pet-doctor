@@ -3,11 +3,11 @@ package com.petdoctor.domain.dto;
 import java.util.List;
 
 public class DoctorDto {
-    private Long id;
-    private String name;
-    private String email;
-    private Integer doctorOffice;
-    private List<AppointmentDto> appointments;
+    final private Long id;
+    final private String name;
+    final private String email;
+    final private Integer doctorOffice;
+    final private List<AppointmentDto> appointments;
 
     public DoctorDto(Long id, String name, String email, Integer doctorOffice, List<AppointmentDto> appointments) {
         this.id = id;

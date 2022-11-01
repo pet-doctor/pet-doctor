@@ -3,11 +3,11 @@ package com.petdoctor.domain.dto;
 import java.util.List;
 
 public class VetClinicDto {
-    private Long id;
-    private String address;
-    private String email;
-    private List<DoctorDto> doctors;
-    private List<ClientDto> clients;
+    final private Long id;
+    final private String address;
+    final private String email;
+    final private List<DoctorDto> doctors;
+    final private List<ClientDto> clients;
 
 
     public VetClinicDto(Long id, String address, String email, List<DoctorDto> doctors, List<ClientDto> clients) {
