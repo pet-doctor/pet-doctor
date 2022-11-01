@@ -7,6 +7,7 @@ import com.petdoctor.domain.model.doctor.DoctorInfo;
 import com.petdoctor.domain.model.doctor.DoctorInterface;
 import com.petdoctor.domain.tool.exception.VetClinicNullException;
 import com.petdoctor.domain.tool.exception.VetClinicValidationException;
+import org.modelmapper.ModelMapper;
 
 import java.util.Map;
 
@@ -81,6 +82,7 @@ public class VetClinic implements VetClinicInterface {
         if (appointmentInfo == null) {
             throw new VetClinicNullException("AppointmentInfo is null!");
         }
+
 
         if (!(appointmentInfo.getDoctor() instanceof DoctorInterface)) {
             throw new VetClinicValidationException("Incorrect type of AppointmentInfo was taken");
