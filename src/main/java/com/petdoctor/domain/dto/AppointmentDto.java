@@ -12,51 +12,41 @@ public class AppointmentDto {
     private DoctorDto doctorDto;
     private VetClinicDto vetClinicDto;
 
-    public Long getId() {
-        return id;
+    public AppointmentDto(Long id,
+                          LocalDate startTime,
+                          AppointmentState appointmentState,
+                          ClientDto client,
+                          DoctorDto doctorDto,
+                          VetClinicDto vetClinicDto) {
+        this.id = id;
+        this.startTime = startTime;
+        this.appointmentState = appointmentState;
+        this.client = client;
+        this.doctorDto = doctorDto;
+        this.vetClinicDto = vetClinicDto;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getId() {
+        return id;
     }
 
     public LocalDate getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDate startTime) {
-        this.startTime = startTime;
-    }
-
     public AppointmentState getAppointmentState() {
         return appointmentState;
-    }
-
-    public void setAppointmentState(AppointmentState appointmentState) {
-        this.appointmentState = appointmentState;
     }
 
     public ClientDto getClient() {
         return client;
     }
 
-    public void setClient(ClientDto client) {
-        this.client = client;
-    }
-
     public DoctorDto getDoctorDto() {
         return doctorDto;
     }
 
-    public void setDoctorDto(DoctorDto doctorDto) {
-        this.doctorDto = doctorDto;
-    }
-
     public VetClinicDto getVetClinicDto() {
         return vetClinicDto;
-    }
-
-    public void setVetClinicDto(VetClinicDto vetClinicDto) {
-        this.vetClinicDto = vetClinicDto;
     }
 }
