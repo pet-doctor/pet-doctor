@@ -1,4 +1,4 @@
-package com.petdoctor.domain.entity;
+package com.petdoctor.data.entity;
 
 import com.petdoctor.domain.model.appointment.AppointmentState;
 

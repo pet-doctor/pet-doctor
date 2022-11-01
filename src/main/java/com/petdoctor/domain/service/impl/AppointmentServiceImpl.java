@@ -2,7 +2,7 @@ package com.petdoctor.domain.service.impl;
 
 import com.petdoctor.data.repository.AppointmentRepository;
 import com.petdoctor.domain.dto.AppointmentDto;
-import com.petdoctor.domain.entity.AppointmentEntity;
+import com.petdoctor.data.entity.AppointmentEntity;
 import com.petdoctor.domain.model.appointment.AppointmentInfo;
 import com.petdoctor.domain.service.AppointmentService;
 import org.modelmapper.ModelMapper;
