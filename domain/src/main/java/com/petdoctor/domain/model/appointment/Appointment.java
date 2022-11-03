@@ -18,12 +18,22 @@ public class Appointment implements AppointmentInterface {
     public Appointment() {
     }
 
-    public Appointment(Long id, LocalDate startTime, AppointmentState appointmentState, ClientInfo clientInfo, DoctorInfo doctor) {
+    /**
+     * @param id (Long) - unique identifier in the database
+     * @param startTime (LocalDate) - time when the appointment will be getting started
+     * @param appointmentState (enum) - current state of the appointment (OPEN, TAKEN, CANCELED, CLOSED)
+     * @param client (ClientInfo) - information about client
+     * @param doctor (DoctorInfo) - information about doctor
+     * @param vetClinic (VetClinicInfo) - information about vet clinic
+     */
+    public Appointment(Long id, LocalDate startTime, AppointmentState appointmentState,
+                       ClientInfo client, DoctorInfo doctor, VetClinicInfo vetClinic) {
         this.id = id;
         this.startTime = startTime;
         this.appointmentState = appointmentState;
-        client = clientInfo;
+        this.client = client;
         this.doctor = doctor;
+        this.vetClinic = vetClinic;
     }
 
     @Override

@@ -3,7 +3,8 @@ package com.petdoctor.domain.model.doctor;
 import com.petdoctor.domain.model.appointment.AppointmentInfo;
 import com.petdoctor.domain.model.appointment.AppointmentInterface;
 import com.petdoctor.domain.model.appointment.AppointmentState;
-import com.petdoctor.domain.tool.exception.VetClinicValidationException;
+import com.petdoctor.domain.tool.exception.PetDoctorValidationException;
+import com.petdoctor.domain.tool.exception.PetDoctorValidationException;
 
 import java.util.Map;
 
@@ -80,26 +81,30 @@ public class Doctor implements DoctorInterface {
     public AppointmentInfo addAppointment(AppointmentInfo appointmentInfo) {
 
         if (!(appointmentInfo instanceof AppointmentInterface)) {
-            throw new VetClinicValidationException("Incorrect type of Appointment was taken");
+            throw new PetDoctorValidationException("Incorrect type of Appointment was taken");
         }
 
         if (appointments.containsKey(appointmentInfo.getId())) {
-            throw new VetClinicValidationException("Appointment has already added");
+            throw new PetDoctorValidationException("Appointment has already added");
         }
 
         appointments.put(appointmentInfo.getId(), (AppointmentInterface) appointmentInfo);
         return appointmentInfo;
     }
 
+    /**
+     * @param appointmentInfo (AppointmentInfo) - abstraction of the Appointment that is only able to get fields
+     * @return AppointmentInfo, after our appointment has been registered by doctor
+     */
     @Override
     public AppointmentInfo bookAppointment(AppointmentInfo appointmentInfo) {
 
         if (!(appointmentInfo instanceof AppointmentInterface)) {
-            throw new VetClinicValidationException("Incorrect type of Appointment was taken");
+            throw new PetDoctorValidationException("Incorrect type of Appointment was taken");
         }
 
         if (!appointments.containsKey(appointmentInfo.getId())) {
-            throw new VetClinicValidationException("Appointments doesn't contains the appointment");
+            throw new PetDoctorValidationException("Appointments doesn't contains the appointment");
         }
 
         ((AppointmentInterface) appointmentInfo).setAppointmentState(AppointmentState.TAKEN);
@@ -107,15 +112,19 @@ public class Doctor implements DoctorInterface {
         return appointmentInfo;
     }
 
+    /**
+     * @param appointmentInfo (AppointmentInfo) - abstraction of the Appointment that is only able to get fields
+     * @return AppointmentInfo, after our appointment has been closed by doctor
+     */
     @Override
     public AppointmentInfo closeAppointment(AppointmentInfo appointmentInfo) {
 
         if (!(appointmentInfo instanceof AppointmentInterface)) {
-            throw new VetClinicValidationException("Incorrect type of Appointment was taken");
+            throw new PetDoctorValidationException("Incorrect type of Appointment was taken");
         }
 
         if (!appointments.containsKey(appointmentInfo.getId())) {
-            throw new VetClinicValidationException("Appointments doesn't contains the appointment");
+            throw new PetDoctorValidationException("Appointments doesn't contains the appointment");
         }
 
         ((AppointmentInterface) appointmentInfo).setAppointmentState(AppointmentState.CLOSED);
@@ -123,15 +132,18 @@ public class Doctor implements DoctorInterface {
         return appointmentInfo;
     }
 
+    /**
+     * @param appointmentInfo (AppointmentInfo) - abstraction of the Appointment that is only able to get fields
+     */
     @Override
     public void deleteAppointment(AppointmentInfo appointmentInfo) {
 
         if (!(appointmentInfo instanceof AppointmentInterface)) {
-            throw new VetClinicValidationException("Incorrect type of Appointment was taken");
+            throw new PetDoctorValidationException("Incorrect type of Appointment was taken");
         }
 
         if (!appointments.containsKey(appointmentInfo.getId())) {
-            throw new VetClinicValidationException("Appointments doesn't contains the appointment");
+            throw new PetDoctorValidationException("Appointments doesn't contains the appointment");
         }
 
         appointments.remove(appointmentInfo.getId());

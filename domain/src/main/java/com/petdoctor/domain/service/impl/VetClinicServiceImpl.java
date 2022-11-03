@@ -5,8 +5,8 @@ import com.petdoctor.domain.model.appointment.AppointmentInfo;
 import com.petdoctor.domain.model.vet.clinic.VetClinicInterface;
 import com.petdoctor.domain.service.DoctorService;
 import com.petdoctor.domain.service.VetClinicService;
-import com.petdoctor.domain.tool.exception.VetClinicNullException;
-import com.petdoctor.domain.tool.exception.VetClinicValidationException;
+import com.petdoctor.domain.tool.exception.PetDoctorNullException;
+import com.petdoctor.domain.tool.exception.PetDoctorValidationException;
 
 public class VetClinicServiceImpl implements VetClinicService {
 
@@ -17,11 +17,11 @@ public class VetClinicServiceImpl implements VetClinicService {
     public AppointmentInfo bookAppointment(AppointmentInfo appointment) {
 
         if (appointment == null) {
-            throw new VetClinicNullException("Appointment is null! :(");
+            throw new PetDoctorNullException("Appointment is null! :(");
         }
 
         if (!(appointment.getVetClinic() instanceof VetClinicInterface vetClinic)) {
-            throw new VetClinicValidationException("Incorrect type of vetClinic was taken");
+            throw new PetDoctorValidationException("Incorrect type of vetClinic was taken");
         }
 
 //        TODO: add mapping with @Entities
