@@ -8,6 +8,7 @@
         <version>2.7.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <packaging>pom</packaging>
     <groupId>com.petdoctor</groupId>
     <artifactId>pet-doctor</artifactId>
     <version>0.0.1-SNAPSHOT</version>
