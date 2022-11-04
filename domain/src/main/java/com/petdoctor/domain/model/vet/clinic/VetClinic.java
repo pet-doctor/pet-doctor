@@ -22,9 +22,9 @@ public class VetClinic implements VetClinicInterface {
     }
 
     /**
-     * @param id (Long) - unique identifier in the database
+     * @param id      (Long) - unique identifier in the database
      * @param address (String) - address of vet clinic
-     * @param email (String) - email of vet clinic
+     * @param email   (String) - email of vet clinic
      * @param doctors (Map Long, DoctorInterface) - information about doctors, that are mapped with their ids'
      * @param clients (Map Long, ClientInterface) - information about clients, that are mapped with their ids'
      */
@@ -59,6 +59,31 @@ public class VetClinic implements VetClinicInterface {
     @Override
     public Map<Long, ClientInfo> getClients() {
         return Map.copyOf(this.clients);
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    @Override
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public void setDoctors(Map<Long, DoctorInterface> doctors) {
+        this.doctors = doctors;
+    }
+
+    @Override
+    public void setClients(Map<Long, ClientInterface> clients) {
+        this.clients = clients;
     }
 
     /**

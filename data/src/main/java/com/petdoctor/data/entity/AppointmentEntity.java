@@ -22,7 +22,7 @@ public class AppointmentEntity {
 
     @ManyToOne
     @JoinColumn(name = "client_id")
-    private ClientEntity client;
+    private ClientEntity clientEntity;
 
     @ManyToOne
     @JoinColumn(name = "doctor_entity_id")
@@ -36,12 +36,12 @@ public class AppointmentEntity {
         this.doctorEntity = doctorEntity;
     }
 
-    public ClientEntity getClient() {
-        return client;
+    public ClientEntity getClientEntity() {
+        return clientEntity;
     }
 
-    public void setClient(ClientEntity client) {
-        this.client = client;
+    public void setClientEntity(ClientEntity clientEntity) {
+        this.clientEntity = clientEntity;
     }
 
     public AppointmentEntity() {
