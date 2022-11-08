@@ -17,7 +17,8 @@ public class MapperConfigure {
                 .setMatchingStrategy(MatchingStrategies.STANDARD) // TODO: read about strategies
                 .setFieldMatchingEnabled(true)
                 .setSkipNullEnabled(true)
-                .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE);
+                .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE)
+                .setPreferNestedProperties(false);
 
         return modelMapper;
     }
