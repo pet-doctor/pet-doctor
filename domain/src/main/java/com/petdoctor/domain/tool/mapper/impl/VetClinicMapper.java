@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Scope("singleton")
 public class VetClinicMapper extends AbstractMapper<VetClinicEntity, VetClinic, VetClinicDto> {
 
-
+    @Autowired
     public VetClinicMapper(ModelMapper modelMapper) {
         super(VetClinicEntity.class, VetClinic.class, VetClinicDto.class);
         this.mapper = modelMapper;
@@ -44,23 +44,27 @@ public class VetClinicMapper extends AbstractMapper<VetClinicEntity, VetClinic, 
     @Override
     protected void mapSpecificFieldsToModelFromEntity(VetClinicEntity source, VetClinic destination) {
 
-        destination.setClients(source.getClientEntities()
-                .stream().collect(Collectors.toMap(ClientEntity::getId,
-                        clientEntity -> mapper.map(clientEntity, Client.class))));
-        destination.setDoctors(source.getDoctorEntities()
-                .stream().collect(Collectors.toMap(DoctorEntity::getId,
-                        doctorEntity -> mapper.map(doctorEntity, Doctor.class))));
+        if (source.getClientEntities() != null)
+            destination.setClients(source.getClientEntities()
+                    .stream().collect(Collectors.toMap(ClientEntity::getId,
+                            clientEntity -> mapper.map(clientEntity, Client.class))));
+        if (source.getDoctorEntities() != null)
+            destination.setDoctors(source.getDoctorEntities()
+                    .stream().collect(Collectors.toMap(DoctorEntity::getId,
+                            doctorEntity -> mapper.map(doctorEntity, Doctor.class))));
     }
 
     @Override
     protected void mapSpecificFieldsToEntityFromModel(VetClinic source, VetClinicEntity destination) {
 
-        destination.setClientEntities(source.getClients()
-                .values().stream().map(client -> mapper.map(client, ClientEntity.class))
-                .toList());
-        destination.setDoctorEntities(source.getDoctors()
-                .values().stream().map(doctor -> mapper.map(doctor, DoctorEntity.class))
-                .toList());
+        if (source.getClients() != null)
+            destination.setClientEntities(source.getClients()
+                    .values().stream().map(client -> mapper.map(client, ClientEntity.class))
+                    .toList());
+        if (source.getDoctors() != null)
+            destination.setDoctorEntities(source.getDoctors()
+                    .values().stream().map(doctor -> mapper.map(doctor, DoctorEntity.class))
+                    .toList());
     }
 
     @Override
@@ -72,11 +76,13 @@ public class VetClinicMapper extends AbstractMapper<VetClinicEntity, VetClinic, 
     @Override
     protected void mapSpecificFieldsToModelFromDto(VetClinicDto source, VetClinic destination) {
 
-        destination.setClients(source.getClients()
-                .stream().collect(Collectors.toMap(ClientDto::getId,
-                        clientDto -> mapper.map(clientDto, Client.class))));
-        destination.setDoctors(source.getDoctors()
-                .stream().collect(Collectors.toMap(DoctorDto::getId,
-                        doctorDto -> mapper.map(doctorDto, Doctor.class))));
+        if (source.getClients() != null)
+            destination.setClients(source.getClients()
+                    .stream().collect(Collectors.toMap(ClientDto::getId,
+                            clientDto -> mapper.map(clientDto, Client.class))));
+        if (source.getDoctors() != null)
+            destination.setDoctors(source.getDoctors()
+                    .stream().collect(Collectors.toMap(DoctorDto::getId,
+                            doctorDto -> mapper.map(doctorDto, Doctor.class))));
     }
 }

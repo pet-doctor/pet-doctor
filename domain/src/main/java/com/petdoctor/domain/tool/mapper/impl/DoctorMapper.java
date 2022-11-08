@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto> {
 
     @Autowired
-    DoctorMapper(ModelMapper modelMapper) {
+    public DoctorMapper(ModelMapper modelMapper) {
         super(DoctorEntity.class, Doctor.class, DoctorDto.class);
         this.mapper = modelMapper;
     }
@@ -43,18 +43,20 @@ public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto
     @Override
     protected void mapSpecificFieldsToModelFromEntity(DoctorEntity source, Doctor destination) {
 
-        destination.setAppointments(source.getAppointmentEntities()
-                .stream()
-                .collect(Collectors.toMap(AppointmentEntity::getId,
-                        elem -> mapper.map(elem, Appointment.class))));
+        if (source.getAppointmentEntities() != null)
+            destination.setAppointments(source.getAppointmentEntities()
+                    .stream()
+                    .collect(Collectors.toMap(AppointmentEntity::getId,
+                            elem -> mapper.map(elem, Appointment.class))));
     }
 
     @Override
     protected void mapSpecificFieldsToEntityFromModel(Doctor source, DoctorEntity destination) {
 
-        destination.setAppointmentEntities(source.getAppointments()
-                .values().stream().map(appointmentInfo -> mapper.map(appointmentInfo, AppointmentEntity.class))
-                .toList());
+        if (source.getAppointments() != null)
+            destination.setAppointmentEntities(source.getAppointments()
+                    .values().stream().map(appointmentInfo -> mapper.map(appointmentInfo, AppointmentEntity.class))
+                    .toList());
     }
 
     @Override
@@ -66,12 +68,12 @@ public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto
     @Override
     protected void mapSpecificFieldsToModelFromDto(DoctorDto source, Doctor destination) {
 
-
         // TODO: should we create some more converters for lite dtos???
-        destination.setAppointments(source.getAppointments()
-                .stream()
-                .collect(Collectors.toMap(AppointmentLiteDto::getId,
-                        elem -> mapper.map(elem, Appointment.class))));
+        if (source.getAppointments() != null)
+            destination.setAppointments(source.getAppointments()
+                    .stream()
+                    .collect(Collectors.toMap(AppointmentLiteDto::getId,
+                            elem -> mapper.map(elem, Appointment.class))));
     }
 
 
