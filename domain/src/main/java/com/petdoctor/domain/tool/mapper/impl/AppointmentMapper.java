@@ -42,17 +42,20 @@ public class AppointmentMapper extends AbstractMapper<AppointmentEntity, Appoint
 
     @Override
     protected void mapSpecificFieldsToModelFromEntity(AppointmentEntity source, Appointment destination) {
-        if (!(source.getClientEntity() == null))
+
+        if (source.getClientEntity() != null)
             destination.setClient(mapper.map(source.getClientEntity(), Client.class));
-        if (!(source.getDoctorEntity() == null))
+        if (source.getDoctorEntity() != null)
             destination.setDoctor(mapper.map(source.getDoctorEntity(), Doctor.class));
     }
 
     @Override
     protected void mapSpecificFieldsToEntityFromModel(Appointment source, AppointmentEntity destination) {
 
-        destination.setClientEntity(mapper.map(source.getClient(), ClientEntity.class));
-        destination.setDoctorEntity(mapper.map(source.getDoctor(), DoctorEntity.class));
+        if (source.getClient() != null)
+            destination.setClientEntity(mapper.map(source.getClient(), ClientEntity.class));
+        if (source.getDoctor() != null)
+            destination.setDoctorEntity(mapper.map(source.getDoctor(), DoctorEntity.class));
     }
 
     @Override
