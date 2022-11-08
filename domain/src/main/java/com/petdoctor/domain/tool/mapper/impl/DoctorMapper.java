@@ -20,11 +20,9 @@ import java.util.stream.Collectors;
 public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto> {
 
     @Autowired
-    private ModelMapper modelMapper;
-
-    public DoctorMapper(ModelMapper modelMapper) {
+    DoctorMapper(ModelMapper modelMapper) {
         super(DoctorEntity.class, Doctor.class, DoctorDto.class);
-        this.modelMapper = modelMapper;
+        this.mapper = modelMapper;
     }
 
     /**
@@ -32,13 +30,13 @@ public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto
      */
     @PostConstruct
     public void setupMapper() {
-        modelMapper.createTypeMap(DoctorEntity.class, Doctor.class)
+        mapper.createTypeMap(DoctorEntity.class, Doctor.class)
                 .setPostConverter(toModelFromEntityConverter());
-        modelMapper.createTypeMap(Doctor.class, DoctorEntity.class)
+        mapper.createTypeMap(Doctor.class, DoctorEntity.class)
                 .setPostConverter(toEntityFromModelConverter());
-        modelMapper.createTypeMap(Doctor.class, DoctorDto.class)
+        mapper.createTypeMap(Doctor.class, DoctorDto.class)
                 .setPostConverter(toDtoFromModelConverter());
-        modelMapper.createTypeMap(DoctorDto.class, Doctor.class)
+        mapper.createTypeMap(DoctorDto.class, Doctor.class)
                 .setPostConverter(toModelFromDtoConverter());
     }
 
@@ -48,14 +46,14 @@ public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto
         destination.setAppointments(source.getAppointmentEntities()
                 .stream()
                 .collect(Collectors.toMap(AppointmentEntity::getId,
-                        elem -> modelMapper.map(elem, Appointment.class))));
+                        elem -> mapper.map(elem, Appointment.class))));
     }
 
     @Override
     protected void mapSpecificFieldsToEntityFromModel(Doctor source, DoctorEntity destination) {
 
         destination.setAppointmentEntities(source.getAppointments()
-                .values().stream().map(appointmentInfo -> modelMapper.map(appointmentInfo, AppointmentEntity.class))
+                .values().stream().map(appointmentInfo -> mapper.map(appointmentInfo, AppointmentEntity.class))
                 .toList());
     }
 
@@ -73,7 +71,7 @@ public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto
         destination.setAppointments(source.getAppointments()
                 .stream()
                 .collect(Collectors.toMap(AppointmentLiteDto::getId,
-                        elem -> modelMapper.map(elem, Appointment.class))));
+                        elem -> mapper.map(elem, Appointment.class))));
     }
 
 

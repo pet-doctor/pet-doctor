@@ -20,11 +20,9 @@ import javax.annotation.PostConstruct;
 public class AppointmentMapper extends AbstractMapper<AppointmentEntity, Appointment, AppointmentDto> {
 
     @Autowired
-    private ModelMapper modelMapper;
-
     public AppointmentMapper(ModelMapper modelMapper) {
         super(AppointmentEntity.class, Appointment.class, AppointmentDto.class);
-        this.modelMapper = modelMapper;
+        this.mapper = modelMapper;
     }
 
     /**
@@ -32,28 +30,29 @@ public class AppointmentMapper extends AbstractMapper<AppointmentEntity, Appoint
      */
     @PostConstruct
     public void setupMapper() {
-        modelMapper.createTypeMap(AppointmentEntity.class, Appointment.class)
+        mapper.createTypeMap(AppointmentEntity.class, Appointment.class)
                 .setPostConverter(toModelFromEntityConverter());
-        modelMapper.createTypeMap(Appointment.class, AppointmentEntity.class)
+        mapper.createTypeMap(Appointment.class, AppointmentEntity.class)
                 .setPostConverter(toEntityFromModelConverter());
-        modelMapper.createTypeMap(Appointment.class, AppointmentDto.class)
+        mapper.createTypeMap(Appointment.class, AppointmentDto.class)
                 .setPostConverter(toDtoFromModelConverter());
-        modelMapper.createTypeMap(AppointmentDto.class, Appointment.class)
+        mapper.createTypeMap(AppointmentDto.class, Appointment.class)
                 .setPostConverter(toModelFromDtoConverter());
     }
 
     @Override
     protected void mapSpecificFieldsToModelFromEntity(AppointmentEntity source, Appointment destination) {
-
-        destination.setClient(modelMapper.map(source.getClientEntity(), Client.class));
-        destination.setDoctor(modelMapper.map(source.getDoctorEntity(), Doctor.class));
+        if (!(source.getClientEntity() == null))
+            destination.setClient(mapper.map(source.getClientEntity(), Client.class));
+        if (!(source.getDoctorEntity() == null))
+            destination.setDoctor(mapper.map(source.getDoctorEntity(), Doctor.class));
     }
 
     @Override
     protected void mapSpecificFieldsToEntityFromModel(Appointment source, AppointmentEntity destination) {
 
-        destination.setClientEntity(modelMapper.map(source.getClient(), ClientEntity.class));
-        destination.setDoctorEntity(modelMapper.map(source.getDoctor(), DoctorEntity.class));
+        destination.setClientEntity(mapper.map(source.getClient(), ClientEntity.class));
+        destination.setDoctorEntity(mapper.map(source.getDoctor(), DoctorEntity.class));
     }
 
     @Override
@@ -65,8 +64,8 @@ public class AppointmentMapper extends AbstractMapper<AppointmentEntity, Appoint
     @Override
     protected void mapSpecificFieldsToModelFromDto(AppointmentDto source, Appointment destination) {
 
-        destination.setClient(modelMapper.map(source.getClient(), Client.class));
-        destination.setDoctor(modelMapper.map(source.getDoctorDto(), Doctor.class));
+        destination.setClient(mapper.map(source.getClient(), Client.class));
+        destination.setDoctor(mapper.map(source.getDoctorDto(), Doctor.class));
     }
 
 }

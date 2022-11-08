@@ -4,14 +4,13 @@ import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.lang.reflect.Type;
 import java.util.Objects;
 
 
 public abstract class AbstractMapper<E, M, D> implements Mapper<E, M, D> {
 
     @Autowired
-    private ModelMapper mapper;
+    protected ModelMapper mapper;
 
     private final Class<E> entityClass;
     private final Class<M> modelClass;

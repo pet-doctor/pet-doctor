@@ -16,11 +16,9 @@ import javax.annotation.PostConstruct;
 public class ClientMapper extends AbstractMapper<ClientEntity, Client, ClientDto> {
 
     @Autowired
-    private ModelMapper modelMapper;
-
-    public ClientMapper(ModelMapper modelMapper) {
+    public ClientMapper(ModelMapper mapper) {
         super(ClientEntity.class, Client.class, ClientDto.class);
-        this.modelMapper = modelMapper;
+        this.mapper = mapper;
     }
 
     /**
@@ -29,13 +27,13 @@ public class ClientMapper extends AbstractMapper<ClientEntity, Client, ClientDto
     @PostConstruct
     public void setupMapper() {
 
-        modelMapper.createTypeMap(ClientEntity.class, Client.class)
+        mapper.createTypeMap(ClientEntity.class, Client.class)
                 .setPostConverter(toModelFromEntityConverter());
-        modelMapper.createTypeMap(Client.class, ClientEntity.class)
+        mapper.createTypeMap(Client.class, ClientEntity.class)
                 .setPostConverter(toEntityFromModelConverter());
-        modelMapper.createTypeMap(Client.class, ClientDto.class)
+        mapper.createTypeMap(Client.class, ClientDto.class)
                 .setPostConverter(toDtoFromModelConverter());
-        modelMapper.createTypeMap(ClientDto.class, Client.class)
+        mapper.createTypeMap(ClientDto.class, Client.class)
                 .setPostConverter(toModelFromDtoConverter());
     }
 
