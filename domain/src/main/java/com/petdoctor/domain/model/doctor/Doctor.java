@@ -12,6 +12,7 @@ public class Doctor implements DoctorInterface {
 
     private Long id;
     private String name;
+    private String surname;
     private String email;
     private Integer doctorOffice;
     private Map<Long, AppointmentInterface> appointments;
@@ -19,7 +20,15 @@ public class Doctor implements DoctorInterface {
     public Doctor() {
     }
 
-    public Doctor(Long id, String name, String email, Integer doctorOffice, Map<Long, AppointmentInterface> appointments) {
+    /**
+     * @param id (Long) - unique identifier in the database
+     * @param name (String) - name of the doctor
+     * @param surname (String) - surname of the doctor
+     * @param email (String) - email of the doctor
+     * @param doctorOffice (Integer) - number of the doctor's office
+     * @param appointments (Map Long, AppointmentInfo) - appointments that are related to current doctor
+     */
+    public Doctor(Long id, String name, String surname, String email, Integer doctorOffice, Map<Long, AppointmentInterface> appointments) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -77,6 +86,10 @@ public class Doctor implements DoctorInterface {
         this.appointments = appointments;
     }
 
+    /**
+     * @param appointmentInfo (AppointmentInfo) - abstraction of the Appointment that is only able to get fields
+     * @return AppointmentInfo, after our appointment has been added by doctor
+     */
     @Override
     public AppointmentInfo addAppointment(AppointmentInfo appointmentInfo) {
 
@@ -147,5 +160,13 @@ public class Doctor implements DoctorInterface {
         }
 
         appointments.remove(appointmentInfo.getId());
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 }
