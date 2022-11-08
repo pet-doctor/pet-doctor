@@ -30,6 +30,27 @@ public class DoctorEntity {
     @JoinColumn(name = "vet_clinic_entity_id")
     private VetClinicEntity vetClinicEntity;
 
+    public DoctorEntity() {
+    }
+
+    public DoctorEntity(Long id,
+                        String name,
+                        String surname,
+                        String email,
+                        Integer doctorOffice,
+                        List<AppointmentEntity> appointmentEntities,
+                        VetClinicEntity vetClinicEntity) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.doctorOffice = doctorOffice;
+        this.appointmentEntities = appointmentEntities;
+        this.vetClinicEntity = vetClinicEntity;
+    }
+
+
+
     public VetClinicEntity getVetClinicEntity() {
         return vetClinicEntity;
     }
