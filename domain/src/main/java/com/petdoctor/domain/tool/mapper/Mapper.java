@@ -4,11 +4,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
-public class Mapper {
 
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
+public interface Mapper<E, M, D> {
+
+    E toEntityFromModel(M model);
+
+    M toModelFromEntity(E entity);
+
+    M toModelFromDto(D dto);
+
+    D toDtoFromModel(M model);
 }

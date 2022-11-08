@@ -77,7 +77,7 @@ public abstract class AbstractMapper<E, M, D> implements Mapper<E, M, D> {
         };
     }
 
-    protected Converter<D, M> toEntityFromDtoConverter() {
+    protected Converter<D, M> toModelFromDtoConverter() {
         return context -> {
             D source = context.getSource();
             M destination = context.getDestination();

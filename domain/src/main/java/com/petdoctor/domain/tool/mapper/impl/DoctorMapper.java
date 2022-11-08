@@ -7,20 +7,48 @@ import com.petdoctor.domain.dto.lite.AppointmentLiteDto;
 import com.petdoctor.domain.model.appointment.Appointment;
 import com.petdoctor.domain.model.doctor.Doctor;
 import com.petdoctor.domain.tool.mapper.AbstractMapper;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import java.util.stream.Collectors;
 
 @Component
 @Scope("singleton")
 public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto> {
 
+    @Autowired
+    private ModelMapper modelMapper;
 
-    DoctorMapper(Class<DoctorEntity> entityClass, Class<Doctor> modelClass, Class<DoctorDto> dtoClass) {
+    DoctorMapper(Class<DoctorEntity> entityClass, Class<Doctor> modelClass, Class<DoctorDto> dtoClass, ModelMapper modelMapper) {
         super(entityClass, modelClass, dtoClass);
+        this.modelMapper = modelMapper;
+    }
+
+    /**
+     * configures Doctors' mapper after constructing it
+     */
+    @PostConstruct
+    public void setupMapper() {
+        modelMapper.createTypeMap(DoctorEntity.class, Doctor.class)
+                .setPostConverter(toModelFromEntityConverter());
+        modelMapper.createTypeMap(Doctor.class, DoctorEntity.class)
+                .setPostConverter(toEntityFromModelConverter());
+        modelMapper.createTypeMap(Doctor.class, DoctorDto.class)
+                .setPostConverter(toDtoFromModelConverter());
+        modelMapper.createTypeMap(DoctorDto.class, Doctor.class)
+                .setPostConverter(toModelFromDtoConverter());
     }
 
     @Override
     protected void mapSpecificFieldsToModelFromEntity(DoctorEntity source, Doctor destination) {
 
+        destination.setAppointments(source.getAppointmentEntities()
+                .stream()
+                .collect(Collectors.toMap(AppointmentEntity::getId,
+                        elem -> modelMapper.map(elem, Appointment.class))));
     }
 
     @Override
