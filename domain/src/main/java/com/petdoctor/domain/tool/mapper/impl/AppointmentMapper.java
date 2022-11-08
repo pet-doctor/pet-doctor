@@ -7,6 +7,7 @@ import com.petdoctor.domain.dto.AppointmentDto;
 import com.petdoctor.domain.model.appointment.Appointment;
 import com.petdoctor.domain.model.client.Client;
 import com.petdoctor.domain.model.doctor.Doctor;
+import com.petdoctor.domain.model.vet.clinic.VetClinic;
 import com.petdoctor.domain.tool.mapper.AbstractMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,8 +68,13 @@ public class AppointmentMapper extends AbstractMapper<AppointmentEntity, Appoint
     @Override
     protected void mapSpecificFieldsToModelFromDto(AppointmentDto source, Appointment destination) {
 
-        destination.setClient(mapper.map(source.getClient(), Client.class));
-        destination.setDoctor(mapper.map(source.getDoctorDto(), Doctor.class));
+        // TODO: rename methods (getClient != getDoctorDto for Oleg)
+        if (source.getClient() != null)
+            destination.setClient(mapper.map(source.getClient(), Client.class));
+        if (source.getDoctorDto() != null)
+            destination.setDoctor(mapper.map(source.getDoctorDto(), Doctor.class));
+        if (source.getVetClinicDto() != null)
+            destination.setVetClinic(mapper.map(source.getVetClinicDto(), VetClinic.class));
     }
 
 }

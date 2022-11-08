@@ -2,8 +2,8 @@ package com.petdoctor.domain.tool.mapper.impl;
 
 import com.petdoctor.data.entity.AppointmentEntity;
 import com.petdoctor.data.entity.DoctorEntity;
+import com.petdoctor.domain.dto.AppointmentDto;
 import com.petdoctor.domain.dto.DoctorDto;
-import com.petdoctor.domain.dto.lite.AppointmentLiteDto;
 import com.petdoctor.domain.model.appointment.Appointment;
 import com.petdoctor.domain.model.doctor.Doctor;
 import com.petdoctor.domain.tool.mapper.AbstractMapper;
@@ -72,9 +72,6 @@ public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto
         if (source.getAppointments() != null)
             destination.setAppointments(source.getAppointments()
                     .stream()
-                    .collect(Collectors.toMap(AppointmentLiteDto::getId,
-                            elem -> mapper.map(elem, Appointment.class))));
+                    .collect(Collectors.toMap(AppointmentDto::getId, elem -> mapper.map(elem, Appointment.class))));
     }
-
-
 }

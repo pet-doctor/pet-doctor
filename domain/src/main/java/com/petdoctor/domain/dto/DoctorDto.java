@@ -1,7 +1,5 @@
 package com.petdoctor.domain.dto;
 
-import com.petdoctor.domain.dto.lite.AppointmentLiteDto;
-
 import java.util.List;
 
 public class DoctorDto {
@@ -10,9 +8,9 @@ public class DoctorDto {
     final private String surname;
     final private String email;
     final private Integer doctorOffice;
-    final private List<AppointmentLiteDto> appointments;
+    final private List<AppointmentDto> appointments;
 
-    public DoctorDto(Long id, String name, String surname, String email, Integer doctorOffice, List<AppointmentLiteDto> appointments) {
+    public DoctorDto(Long id, String name, String surname, String email, Integer doctorOffice, List<AppointmentDto> appointments) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -20,6 +18,8 @@ public class DoctorDto {
         this.doctorOffice = doctorOffice;
         this.appointments = appointments;
     }
+
+
 
     public Long getId() {
         return id;
@@ -41,7 +41,7 @@ public class DoctorDto {
         return doctorOffice;
     }
 
-    public List<AppointmentLiteDto> getAppointments() {
+    public List<AppointmentDto> getAppointments() {
         return appointments;
     }
 }
