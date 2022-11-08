@@ -1,7 +1,5 @@
 package com.petdoctor.data.entity;
 
-import com.petdoctor.domain.model.appointment.AppointmentState;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 

@@ -7,7 +7,7 @@ import com.petdoctor.domain.dto.ClientDto;
 import com.petdoctor.domain.dto.DoctorDto;
 import com.petdoctor.domain.dto.VetClinicDto;
 import com.petdoctor.domain.model.appointment.AppointmentInfo;
-import com.petdoctor.domain.model.appointment.AppointmentState;
+import com.petdoctor.data.entity.AppointmentState;
 import com.petdoctor.domain.service.AppointmentService;
 import com.petdoctor.domain.tool.exception.PetDoctorNotFoundException;
 import com.petdoctor.domain.tool.exception.PetDoctorNullException;
@@ -21,8 +21,8 @@ import java.util.List;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
-    private AppointmentRepository appointmentRepository;
-    private ModelMapper modelMapper;
+    private final AppointmentRepository appointmentRepository;
+    private final ModelMapper modelMapper;
     @Autowired
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository, ModelMapper modelMapper) {
         this.appointmentRepository = appointmentRepository;

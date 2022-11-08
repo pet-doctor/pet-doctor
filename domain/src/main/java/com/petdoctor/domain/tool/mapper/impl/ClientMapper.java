@@ -18,8 +18,8 @@ public class ClientMapper extends AbstractMapper<ClientEntity, Client, ClientDto
     @Autowired
     private ModelMapper modelMapper;
 
-    ClientMapper(Class<ClientEntity> entityClass, Class<Client> modelClass, Class<ClientDto> dtoClass, ModelMapper modelMapper) {
-        super(entityClass, modelClass, dtoClass);
+    public ClientMapper(ModelMapper modelMapper) {
+        super(ClientEntity.class, Client.class, ClientDto.class);
         this.modelMapper = modelMapper;
     }
 

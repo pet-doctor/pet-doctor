@@ -22,8 +22,8 @@ public class AppointmentMapper extends AbstractMapper<AppointmentEntity, Appoint
     @Autowired
     private ModelMapper modelMapper;
 
-    AppointmentMapper(Class<AppointmentEntity> entityClass, Class<Appointment> modelClass, Class<AppointmentDto> dtoClass, ModelMapper modelMapper) {
-        super(entityClass, modelClass, dtoClass);
+    public AppointmentMapper(ModelMapper modelMapper) {
+        super(AppointmentEntity.class, Appointment.class, AppointmentDto.class);
         this.modelMapper = modelMapper;
     }
 

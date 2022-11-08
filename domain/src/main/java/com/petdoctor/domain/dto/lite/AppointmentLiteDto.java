@@ -1,6 +1,6 @@
 package com.petdoctor.domain.dto.lite;
 
-import com.petdoctor.domain.model.appointment.AppointmentState;
+import com.petdoctor.data.entity.AppointmentState;
 
 import java.time.LocalDate;
 

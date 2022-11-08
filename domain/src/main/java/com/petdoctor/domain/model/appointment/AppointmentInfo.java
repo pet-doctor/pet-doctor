@@ -1,5 +1,6 @@
 package com.petdoctor.domain.model.appointment;
 
+import com.petdoctor.data.entity.AppointmentState;
 import com.petdoctor.domain.model.client.ClientInfo;
 import com.petdoctor.domain.model.doctor.DoctorInfo;
 import com.petdoctor.domain.model.vet.clinic.VetClinicInfo;

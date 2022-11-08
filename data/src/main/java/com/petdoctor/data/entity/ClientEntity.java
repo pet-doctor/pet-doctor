@@ -21,13 +21,13 @@ public class ClientEntity {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "pet", nullable = false)
-    private String pet;
+    @Column(name = "pet_name", nullable = false)
+    private String petName;
 
     @Column(name = "pet_problem", nullable = false)
     private String petProblem;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "clientEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AppointmentEntity> appointments = new ArrayList<>();
 
     @ManyToOne
@@ -49,14 +49,14 @@ public class ClientEntity {
                         String name,
                         String surname,
                         String email,
-                        String pet,
+                        String petName,
                         String petProblem,
                         List<AppointmentEntity> appointments) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.pet = pet;
+        this.petName = petName;
         this.petProblem = petProblem;
         this.appointments = appointments;
     }
@@ -93,12 +93,12 @@ public class ClientEntity {
         this.email = email;
     }
 
-    public String getPet() {
-        return pet;
+    public String getPetName() {
+        return petName;
     }
 
-    public void setPet(String pet) {
-        this.pet = pet;
+    public void setPetName(String pet) {
+        this.petName = pet;
     }
 
     public String getPetProblem() {

@@ -22,8 +22,8 @@ public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto
     @Autowired
     private ModelMapper modelMapper;
 
-    DoctorMapper(Class<DoctorEntity> entityClass, Class<Doctor> modelClass, Class<DoctorDto> dtoClass, ModelMapper modelMapper) {
-        super(entityClass, modelClass, dtoClass);
+    public DoctorMapper(ModelMapper modelMapper) {
+        super(DoctorEntity.class, Doctor.class, DoctorDto.class);
         this.modelMapper = modelMapper;
     }
 

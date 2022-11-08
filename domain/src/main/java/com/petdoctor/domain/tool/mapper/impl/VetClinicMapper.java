@@ -25,8 +25,8 @@ public class VetClinicMapper extends AbstractMapper<VetClinicEntity, VetClinic, 
     @Autowired
     private ModelMapper modelMapper;
 
-    VetClinicMapper(Class<VetClinicEntity> entityClass, Class<VetClinic> modelClass, Class<VetClinicDto> dtoClass, ModelMapper modelMapper) {
-        super(entityClass, modelClass, dtoClass);
+    public VetClinicMapper(ModelMapper modelMapper) {
+        super(VetClinicEntity.class, VetClinic.class, VetClinicDto.class);
         this.modelMapper = modelMapper;
     }
 

@@ -1,4 +1,4 @@
-package com.petdoctor.domain.model.appointment;
+package com.petdoctor.data.entity;
 
 public enum AppointmentState {
     OPEN,

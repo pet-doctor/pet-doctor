@@ -2,8 +2,7 @@ package com.petdoctor.domain.model.doctor;
 
 import com.petdoctor.domain.model.appointment.AppointmentInfo;
 import com.petdoctor.domain.model.appointment.AppointmentInterface;
-import com.petdoctor.domain.model.appointment.AppointmentState;
-import com.petdoctor.domain.tool.exception.PetDoctorValidationException;
+import com.petdoctor.data.entity.AppointmentState;
 import com.petdoctor.domain.tool.exception.PetDoctorValidationException;
 
 import java.util.Map;
