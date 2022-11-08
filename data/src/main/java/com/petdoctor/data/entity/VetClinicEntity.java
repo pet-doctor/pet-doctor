@@ -23,6 +23,21 @@ public class VetClinicEntity {
     @OneToMany(mappedBy = "vetClinicEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DoctorEntity> doctorEntities = new ArrayList<>();
 
+    public VetClinicEntity() {
+    }
+
+    public VetClinicEntity(Long id,
+                           String address,
+                           String email,
+                           List<ClientEntity> clientEntities,
+                           List<DoctorEntity> doctorEntities) {
+        this.id = id;
+        this.address = address;
+        this.email = email;
+        this.clientEntities = clientEntities;
+        this.doctorEntities = doctorEntities;
+    }
+
     public List<DoctorEntity> getDoctorEntities() {
         return doctorEntities;
     }
