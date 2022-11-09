@@ -5,6 +5,7 @@ import com.petdoctor.domain.model.appointment.AppointmentInterface;
 import com.petdoctor.data.entity.AppointmentState;
 import com.petdoctor.domain.tool.exception.PetDoctorValidationException;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Doctor implements DoctorInterface {
@@ -14,7 +15,7 @@ public class Doctor implements DoctorInterface {
     private String surname;
     private String email;
     private Integer doctorOffice;
-    private Map<Long, AppointmentInterface> appointments;
+    private HashMap<Long, AppointmentInterface> appointments = new HashMap<>();
 
     public Doctor() {
     }
@@ -27,7 +28,7 @@ public class Doctor implements DoctorInterface {
      * @param doctorOffice (Integer) - number of the doctor's office
      * @param appointments (Map Long, AppointmentInfo) - appointments that are related to current doctor
      */
-    public Doctor(Long id, String name, String surname, String email, Integer doctorOffice, Map<Long, AppointmentInterface> appointments) {
+    public Doctor(Long id, String name, String surname, String email, Integer doctorOffice, HashMap<Long, AppointmentInterface> appointments) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -56,8 +57,8 @@ public class Doctor implements DoctorInterface {
     }
 
     @Override
-    public Map<Long, AppointmentInfo> getAppointments() {
-        return Map.copyOf(this.appointments);
+    public HashMap<Long, AppointmentInfo> getAppointments() {
+        return new HashMap<>(this.appointments);
     }
 
     @Override
@@ -81,7 +82,7 @@ public class Doctor implements DoctorInterface {
     }
 
     @Override
-    public void setAppointments(Map<Long, AppointmentInterface> appointments) {
+    public void setAppointments(HashMap<Long, AppointmentInterface> appointments) {
         this.appointments = appointments;
     }
 

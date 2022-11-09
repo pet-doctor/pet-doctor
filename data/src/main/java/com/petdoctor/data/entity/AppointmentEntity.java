@@ -51,6 +51,18 @@ public class AppointmentEntity {
         this.appointmentState = appointmentState;
     }
 
+    public AppointmentEntity(Long id,
+                             LocalDate startTime,
+                             AppointmentState appointmentState,
+                             ClientEntity clientEntity,
+                             DoctorEntity doctorEntity) {
+        this.id = id;
+        this.startTime = startTime;
+        this.appointmentState = appointmentState;
+        this.clientEntity = clientEntity;
+        this.doctorEntity = doctorEntity;
+    }
+
     public Long getId() {
         return id;
     }

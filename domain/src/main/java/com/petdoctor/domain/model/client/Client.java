@@ -29,7 +29,6 @@ public class Client implements ClientInterface {
         this.petProblem = petProblem;
     }
 
-
     @Override
     public Long getId() {
         return this.id;

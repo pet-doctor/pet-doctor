@@ -3,6 +3,7 @@ package com.petdoctor.domain.model.doctor;
 import com.petdoctor.domain.model.appointment.AppointmentInfo;
 import com.petdoctor.domain.model.appointment.AppointmentInterface;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -16,7 +17,7 @@ public interface DoctorInterface extends DoctorInfo {
 
     void setDoctorOffice(Integer doctorOffice);
 
-    void setAppointments(Map<Long, AppointmentInterface> appointments);
+    void setAppointments(HashMap<Long, AppointmentInterface> appointments);
 
     AppointmentInfo addAppointment(AppointmentInfo appointmentInfo);
 
