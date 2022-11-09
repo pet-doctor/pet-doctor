@@ -5,12 +5,14 @@ import com.petdoctor.data.entity.AppointmentState;
 import java.time.LocalDate;
 
 public class AppointmentDto {
-    final private Long id;
-    final private LocalDate startTime;
-    final private AppointmentState appointmentState;
-    final private ClientDto client;
-    final private DoctorDto doctorDto;
-    final private VetClinicDto vetClinicDto;
+    private Long id;
+    private LocalDate startTime;
+    private AppointmentState appointmentState;
+    private ClientDto client;
+    private DoctorDto doctorDto;
+    private VetClinicDto vetClinicDto;
+
+    public AppointmentDto() {}
 
     public AppointmentDto(Long id,
                           LocalDate startTime,
