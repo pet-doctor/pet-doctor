@@ -1,5 +1,6 @@
 package com.petdoctor.domain.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DoctorDto {
@@ -8,7 +9,7 @@ public class DoctorDto {
     final private String surname;
     final private String email;
     final private Integer doctorOffice;
-    final private List<AppointmentDto> appointments;
+    private List<AppointmentDto> appointments = new ArrayList<>();
 
     public DoctorDto(Long id, String name, String surname, String email, Integer doctorOffice, List<AppointmentDto> appointments) {
         this.id = id;
