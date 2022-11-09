@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DoctorDto {
-    final private Long id;
-    final private String name;
-    final private String surname;
-    final private String email;
-    final private Integer doctorOffice;
-    private List<AppointmentDto> appointments = new ArrayList<>();
+    private Long id;
+    private String name;
+    private String surname;
+    private String email;
+    private Integer doctorOffice;
+    private ArrayList<AppointmentDto> appointments = new ArrayList<>();
 
-    public DoctorDto(Long id, String name, String surname, String email, Integer doctorOffice, List<AppointmentDto> appointments) {
+    public DoctorDto() {}
+
+    public DoctorDto(Long id, String name, String surname, String email, Integer doctorOffice, ArrayList<AppointmentDto> appointments) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -42,7 +44,7 @@ public class DoctorDto {
         return doctorOffice;
     }
 
-    public List<AppointmentDto> getAppointments() {
+    public ArrayList<AppointmentDto> getAppointments() {
         return appointments;
     }
 }
