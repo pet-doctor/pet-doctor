@@ -31,9 +31,6 @@ public class AppointmentServiceTest {
     private AppointmentRepository appointmentRepository;
 
     @Autowired
-    private Mapper<AppointmentEntity, Appointment, AppointmentDto> appointmentMapper;
-
-    @Autowired
     private AppointmentServiceImpl appointmentService;
 
     @Test

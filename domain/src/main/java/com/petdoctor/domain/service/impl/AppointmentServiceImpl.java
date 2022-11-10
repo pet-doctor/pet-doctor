@@ -35,7 +35,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public List<AppointmentDto> findAllAppointment() {
-               List<AppointmentInfo> appointmentInfos = appointmentRepository
+        List<AppointmentInfo> appointmentInfos = appointmentRepository
                 .findAll()
                 .stream()
                 .map(appointmentEntity -> (AppointmentInfo) appointmentMapper.toModelFromEntity(appointmentEntity))
