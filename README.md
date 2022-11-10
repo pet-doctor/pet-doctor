@@ -12,6 +12,6 @@ PetDoctor - это удобный сервис для онлайн записи 
 ## Навигация по проекту
 
 * [Главная страница](fundamentals/glavnaya-stranica.md)
-* ****[Страница с услугами](fundamentals/stranica-s-uslugami.md)
+* [Страница с услугами](fundamentals/stranica-s-uslugami.md)
 * [Страница с вакансиями](fundamentals/stranica-s-vakansiyami.md)
 
