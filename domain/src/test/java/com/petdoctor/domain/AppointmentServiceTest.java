@@ -13,8 +13,6 @@ import com.petdoctor.domain.model.appointment.Appointment;
 import com.petdoctor.domain.service.impl.AppointmentServiceImpl;
 import com.petdoctor.domain.tool.mapper.Mapper;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +20,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -91,8 +90,91 @@ public class AppointmentServiceTest {
                 doctorDto,
                 vetClinicDto);
 
-
         AppointmentDto savedAppointmentDto = appointmentService.saveAppointment(appointmentDto);
         assertEquals(savedAppointmentDto.getId(), appointmentDto.getId());
+    }
+
+    @Test
+    public void findAllAppointment() {
+        var appointmentEntity1 = new AppointmentEntity(1L,
+                LocalDate.now(),
+                AppointmentState.OPEN,
+                new ClientEntity(),
+                new DoctorEntity());
+
+        var appointmentEntity2 = new AppointmentEntity(2L,
+                LocalDate.now(),
+                AppointmentState.CLOSED,
+                new ClientEntity(),
+                new DoctorEntity());
+
+        var appointmentEntity3 = new AppointmentEntity(3L,
+                LocalDate.now(),
+                AppointmentState.CANCELED,
+                new ClientEntity(),
+                new DoctorEntity());
+
+
+        Mockito.when(appointmentRepository
+                .findAll()).thenReturn(List.of(appointmentEntity1, appointmentEntity2, appointmentEntity3));
+
+        List<AppointmentDto> appointmentDtos = appointmentService.findAllAppointment();
+        assertEquals(appointmentDtos.get(0).getId(), appointmentEntity1.getId());
+        assertEquals(appointmentDtos.get(1).getId(), appointmentEntity2.getId());
+        assertEquals(appointmentDtos.get(2).getId(), appointmentEntity3.getId());
+    }
+
+    @Test
+    public void getAppointmentById() {
+        var appointmentEntity = new AppointmentEntity(1L,
+                LocalDate.now(),
+                AppointmentState.OPEN,
+                new ClientEntity(),
+                new DoctorEntity());
+
+        Mockito.when(appointmentRepository.getReferenceById(1L)).thenReturn(appointmentEntity);
+        AppointmentDto appointmentDto = appointmentService.getAppointmentById(1L);
+
+        assertEquals(appointmentDto.getId(), appointmentEntity.getId());
+        assertEquals(appointmentDto.getStartTime(), appointmentEntity.getStartTime());
+        assertEquals(appointmentDto.getAppointmentState(), appointmentEntity.getAppointmentState());
+    }
+
+    @Test
+    public void updateAppointment() {
+        var appointmentEntity = new AppointmentEntity(1L,
+                LocalDate.now(),
+                AppointmentState.OPEN,
+                new ClientEntity(),
+                new DoctorEntity());
+
+        Mockito.when(appointmentRepository.getReferenceById(1L)).thenReturn(appointmentEntity);
+        LocalDate localDate = LocalDate.of(2011, 1, 12);
+
+        var repositoryReturnedEntity = new AppointmentEntity(1L,
+                localDate,
+                AppointmentState.OPEN,
+                null,
+                null);
+
+        Mockito.when(appointmentRepository.save(Mockito.any(AppointmentEntity.class))).thenReturn(repositoryReturnedEntity);
+
+        var newAppointmentDto = new AppointmentDto(1L,
+                localDate,
+                null,
+                null,
+                null,
+                null);
+
+        AppointmentDto updatedAppointmentDto = appointmentService.updateAppointment(newAppointmentDto);
+        assertEquals(appointmentEntity.getId(), updatedAppointmentDto.getId());
+        assertEquals(appointmentEntity.getAppointmentState(), updatedAppointmentDto.getAppointmentState());
+        assertEquals(localDate, updatedAppointmentDto.getStartTime());
+    }
+
+    @Test
+    public void deleteAppointmentById() {
+        appointmentService.deleteAppointmentById(1L);
+        Mockito.verify(appointmentRepository, Mockito.times(1)).deleteById(1L);
     }
 }
