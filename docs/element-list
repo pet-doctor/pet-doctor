@@ -1,0 +1,13 @@
+com.petdoctor
+com.petdoctor.domain.dto
+com.petdoctor.domain.model.appointment
+com.petdoctor.domain.model.client
+com.petdoctor.domain.model.doctor
+com.petdoctor.domain.model.schedule
+com.petdoctor.domain.model.schedule.impl
+com.petdoctor.domain.model.vet.clinic
+com.petdoctor.domain.service
+com.petdoctor.domain.service.impl
+com.petdoctor.domain.tool.exception
+com.petdoctor.domain.tool.mapper
+com.petdoctor.domain.tool.mapper.impl
