@@ -69,8 +69,8 @@ public class AppointmentMapper extends AbstractMapper<AppointmentEntity, Appoint
     protected void mapSpecificFieldsToModelFromDto(AppointmentDto source, Appointment destination) {
 
         // TODO: rename methods (getClient != getDoctorDto for Oleg)
-        if (source.getClient() != null)
-            destination.setClient(mapper.map(source.getClient(), Client.class));
+        if (source.getClientDto() != null)
+            destination.setClient(mapper.map(source.getClientDto(), Client.class));
         if (source.getDoctorDto() != null)
             destination.setDoctor(mapper.map(source.getDoctorDto(), Doctor.class));
         if (source.getVetClinicDto() != null)

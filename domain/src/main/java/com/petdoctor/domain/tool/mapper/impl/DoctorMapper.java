@@ -46,9 +46,11 @@ public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto
 
     @Override
     protected void mapSpecificFieldsToModelFromEntity(DoctorEntity source, Doctor destination) {
-        HashMap<Long, AppointmentInterface> hashMap = new HashMap<>();
-        source.getAppointmentEntities().forEach(a -> hashMap.put(a.getId(), mapper.map(a, Appointment.class)));
-        destination.setAppointments(hashMap);
+        if (source.getAppointmentEntities() != null) {
+            HashMap<Long, AppointmentInterface> hashMap = new HashMap<>();
+            source.getAppointmentEntities().forEach(a -> hashMap.put(a.getId(), mapper.map(a, Appointment.class)));
+            destination.setAppointments(hashMap);
+        }
 //        if (source.getAppointmentEntities() != null)
 //            destination.setAppointments(source.getAppointmentEntities()
 //                    .stream()

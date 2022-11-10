@@ -8,7 +8,7 @@ public class AppointmentDto {
     private Long id;
     private LocalDate startTime;
     private AppointmentState appointmentState;
-    private ClientDto client;
+    private ClientDto clientDto;
     private DoctorDto doctorDto;
     private VetClinicDto vetClinicDto;
 
@@ -17,13 +17,13 @@ public class AppointmentDto {
     public AppointmentDto(Long id,
                           LocalDate startTime,
                           AppointmentState appointmentState,
-                          ClientDto client,
+                          ClientDto clientDto,
                           DoctorDto doctorDto,
                           VetClinicDto vetClinicDto) {
         this.id = id;
         this.startTime = startTime;
         this.appointmentState = appointmentState;
-        this.client = client;
+        this.clientDto = clientDto;
         this.doctorDto = doctorDto;
         this.vetClinicDto = vetClinicDto;
     }
@@ -40,8 +40,8 @@ public class AppointmentDto {
         return appointmentState;
     }
 
-    public ClientDto getClient() {
-        return client;
+    public ClientDto getClientDto() {
+        return clientDto;
     }
 
     public DoctorDto getDoctorDto() {

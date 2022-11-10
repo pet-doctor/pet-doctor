@@ -6,13 +6,15 @@ import com.petdoctor.data.entity.AppointmentEntity;
 import com.petdoctor.domain.dto.ClientDto;
 import com.petdoctor.domain.dto.DoctorDto;
 import com.petdoctor.domain.dto.VetClinicDto;
+import com.petdoctor.domain.model.appointment.Appointment;
 import com.petdoctor.domain.model.appointment.AppointmentInfo;
 import com.petdoctor.data.entity.AppointmentState;
 import com.petdoctor.domain.service.AppointmentService;
 import com.petdoctor.domain.tool.exception.PetDoctorNotFoundException;
 import com.petdoctor.domain.tool.exception.PetDoctorNullException;
-import org.modelmapper.ModelMapper;
+import com.petdoctor.domain.tool.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -22,24 +24,26 @@ import java.util.List;
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository appointmentRepository;
-    private final ModelMapper modelMapper;
+    private final Mapper<AppointmentEntity, Appointment, AppointmentDto> appointmentMapper;
+
     @Autowired
-    public AppointmentServiceImpl(AppointmentRepository appointmentRepository, ModelMapper modelMapper) {
+    public AppointmentServiceImpl(AppointmentRepository appointmentRepository,
+                                  Mapper<AppointmentEntity, Appointment, AppointmentDto> appointmentMapper) {
         this.appointmentRepository = appointmentRepository;
-        this.modelMapper = modelMapper;
+        this.appointmentMapper = appointmentMapper;
     }
 
     @Override
     public List<AppointmentDto> findAllAppointment() {
-        List<AppointmentInfo> appointmentInfos = appointmentRepository
+               List<AppointmentInfo> appointmentInfos = appointmentRepository
                 .findAll()
                 .stream()
-                .map(a -> modelMapper.map(a, AppointmentInfo.class))
+                .map(appointmentEntity -> (AppointmentInfo) appointmentMapper.toModelFromEntity(appointmentEntity))
                 .toList();
 
         return appointmentInfos
                 .stream()
-                .map(a -> modelMapper.map(a, AppointmentDto.class))
+                .map(a -> appointmentMapper.toDtoFromModel((Appointment) a))
                 .toList();
     }
 
@@ -50,9 +54,8 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
 
         try {
-            AppointmentInfo appointmentInfo =
-                    modelMapper.map(appointmentRepository.getReferenceById(id), AppointmentInfo.class);
-            return modelMapper.map(appointmentInfo, AppointmentDto.class);
+            AppointmentInfo appointmentInfo = appointmentMapper.toModelFromEntity(appointmentRepository.getReferenceById(id));
+            return appointmentMapper.toDtoFromModel((Appointment) appointmentInfo);
         } catch (EntityNotFoundException e) {
             throw new PetDoctorNotFoundException(id.toString());
         }
@@ -64,12 +67,10 @@ public class AppointmentServiceImpl implements AppointmentService {
             throw new PetDoctorNullException("the appointmentDto is null!");
         }
 
-        AppointmentInfo appointmentInfo =
-                modelMapper.map(appointmentDto, AppointmentInfo.class);
-
+        AppointmentInfo appointmentInfo = appointmentMapper.toModelFromDto(appointmentDto);
         var appointmentEntity =
-                appointmentRepository.save(modelMapper.map(appointmentInfo, AppointmentEntity.class));
-        return modelMapper.map(modelMapper.map(appointmentEntity, AppointmentInfo.class), AppointmentDto.class);
+                appointmentRepository.save(appointmentMapper.toEntityFromModel((Appointment) appointmentInfo));
+        return appointmentMapper.toDtoFromModel(appointmentMapper.toModelFromEntity(appointmentEntity));
     }
 
     @Override
@@ -82,7 +83,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             AppointmentDto oldAppointment = this.getAppointmentById(appointmentDto.getId());
             LocalDate startTime = oldAppointment.getStartTime();
             AppointmentState appointmentState = oldAppointment.getAppointmentState();
-            ClientDto clientDto = oldAppointment.getClient();
+            ClientDto clientDto = oldAppointment.getClientDto();
             DoctorDto doctorDto = oldAppointment.getDoctorDto();
             VetClinicDto vetClinicDto = oldAppointment.getVetClinicDto();
 
@@ -94,8 +95,8 @@ public class AppointmentServiceImpl implements AppointmentService {
                 appointmentState = appointmentDto.getAppointmentState();
             }
 
-            if (appointmentDto.getClient() != null) {
-                clientDto = appointmentDto.getClient();
+            if (appointmentDto.getClientDto() != null) {
+                clientDto = appointmentDto.getClientDto();
             }
 
             if (appointmentDto.getDoctorDto() != null) {
@@ -114,11 +115,11 @@ public class AppointmentServiceImpl implements AppointmentService {
                             vetClinicDto);
 
             AppointmentInfo updatedAppointmentInfo =
-                    modelMapper.map(updatedAppointmentDto, AppointmentInfo.class);
+                    appointmentMapper.toModelFromDto(updatedAppointmentDto);
 
             var updatedAppointmentEntity =
-                    appointmentRepository.save(modelMapper.map(updatedAppointmentInfo, AppointmentEntity.class));
-            return modelMapper.map(modelMapper.map(updatedAppointmentEntity, AppointmentInfo.class), AppointmentDto.class);
+                    appointmentRepository.save(appointmentMapper.toEntityFromModel((Appointment) updatedAppointmentInfo));
+            return appointmentMapper.toDtoFromModel(appointmentMapper.toModelFromEntity(updatedAppointmentEntity));
         } catch (Exception e) {
             throw new PetDoctorNotFoundException(appointmentDto.getId().toString());
         }
@@ -129,7 +130,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         if (id == null) {
             throw new PetDoctorNullException("id is null!");
         }
-
-        appointmentRepository.deleteById(id);
+        try {
+            appointmentRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new PetDoctorNotFoundException(id.toString());
+        }
     }
 }
