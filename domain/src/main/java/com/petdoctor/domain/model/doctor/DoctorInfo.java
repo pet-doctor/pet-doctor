@@ -2,6 +2,7 @@ package com.petdoctor.domain.model.doctor;
 
 import com.petdoctor.domain.model.appointment.AppointmentInfo;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public interface DoctorInfo {
@@ -14,5 +15,5 @@ public interface DoctorInfo {
 
     Integer getDoctorOffice();
 
-    Map<Long, AppointmentInfo> getAppointments();
+    HashMap<Long, AppointmentInfo> getAppointments();
 }

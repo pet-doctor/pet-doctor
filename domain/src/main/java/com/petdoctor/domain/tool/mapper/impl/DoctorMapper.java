@@ -5,14 +5,18 @@ import com.petdoctor.data.entity.DoctorEntity;
 import com.petdoctor.domain.dto.AppointmentDto;
 import com.petdoctor.domain.dto.DoctorDto;
 import com.petdoctor.domain.model.appointment.Appointment;
+import com.petdoctor.domain.model.appointment.AppointmentInterface;
 import com.petdoctor.domain.model.doctor.Doctor;
 import com.petdoctor.domain.tool.mapper.AbstractMapper;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.print.Doc;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 
 @Component
@@ -42,12 +46,13 @@ public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto
 
     @Override
     protected void mapSpecificFieldsToModelFromEntity(DoctorEntity source, Doctor destination) {
-
-        if (source.getAppointmentEntities() != null)
-            destination.setAppointments(source.getAppointmentEntities()
-                    .stream()
-                    .collect(Collectors.toMap(AppointmentEntity::getId,
-                            elem -> mapper.map(elem, Appointment.class))));
+        HashMap<Long, AppointmentInterface> hashMap = new HashMap<>();
+        source.getAppointmentEntities().forEach(a -> hashMap.put(a.getId(), mapper.map(a, Appointment.class)));
+        destination.setAppointments(hashMap);
+//        if (source.getAppointmentEntities() != null)
+//            destination.setAppointments(source.getAppointmentEntities()
+//                    .stream()
+//                    .collect(Collectors.toMap(AppointmentEntity::getId, elem -> mapper.map(elem, Appointment.class))));
     }
 
     @Override
@@ -61,17 +66,25 @@ public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto
 
     @Override
     protected void mapSpecificFieldsToDtoFromModel(Doctor source, DoctorDto destination) {
-
         // TODO: we are unable to change DoctorDto special fields
     }
 
     @Override
     protected void mapSpecificFieldsToModelFromDto(DoctorDto source, Doctor destination) {
-
         // TODO: should we create some more converters for lite dtos???
-        if (source.getAppointments() != null)
-            destination.setAppointments(source.getAppointments()
-                    .stream()
-                    .collect(Collectors.toMap(AppointmentDto::getId, elem -> mapper.map(elem, Appointment.class))));
+
+        HashMap<Long, AppointmentInterface> hashMap = new HashMap<>();
+        source.getAppointments().forEach(a -> hashMap.put(a.getId(), mapper.map(a, Appointment.class)));
+        destination.setAppointments(hashMap);
+
+//        if (source.getAppointments() != null)
+//            destination.setAppointments(source.getAppointments()
+//                    .stream()
+//                    .collect(Collectors.toMap(AppointmentDto::getId, elem -> mapper.map(elem, Appointment.class))));
+
+//        if (source.getAppointments() == null)
+//            destination.setAppointments(source.getAppointments()
+//                    .stream()
+//                    .collect(Collectors.toMap(AppointmentDto::getId, elem -> mapper.map(elem, Appointment.class))));
     }
 }

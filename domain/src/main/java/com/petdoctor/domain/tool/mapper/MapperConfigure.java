@@ -1,6 +1,9 @@
 package com.petdoctor.domain.tool.mapper;
 
+import com.petdoctor.domain.dto.DoctorDto;
+import com.petdoctor.domain.model.doctor.Doctor;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,12 +17,13 @@ public class MapperConfigure {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.STANDARD) // TODO: read about strategies
+                .setMatchingStrategy(MatchingStrategies.STRICT) // TODO: read about strategies
                 .setFieldMatchingEnabled(true)
                 .setSkipNullEnabled(true)
                 .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE)
-                .setPreferNestedProperties(false);
+                .setPreferNestedProperties(false)
+                .setAmbiguityIgnored(true);
 
-        return modelMapper;
+    return modelMapper;
     }
 }
