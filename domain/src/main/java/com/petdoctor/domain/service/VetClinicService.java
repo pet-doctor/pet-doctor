@@ -2,7 +2,16 @@ package com.petdoctor.domain.service;
 
 import com.petdoctor.domain.dto.VetClinicDto;
 
+import java.util.List;
+
 public interface VetClinicService {
+
+    /**
+     * @return List of VetClinic
+     */
+    List<VetClinicDto> findAllVetClinic();
+
+
     /**
      * @param id VetClinic ID
      * @return Immutable DTO of VetClinic
