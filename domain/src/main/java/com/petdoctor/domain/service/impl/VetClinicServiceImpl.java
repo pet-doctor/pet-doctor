@@ -13,10 +13,12 @@ import com.petdoctor.domain.tool.exception.PetDoctorNullException;
 import com.petdoctor.domain.tool.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
+@Service
 public class VetClinicServiceImpl implements VetClinicService {
 
     private final VetClinicRepository vetClinicRepository;
