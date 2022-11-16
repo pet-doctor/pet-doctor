@@ -27,7 +27,6 @@ public class AppointmentMapperTest {
 
     @Test
     void mapEntityToModel() {
-
         var doctorEntity = new DoctorEntity(1L,
                 "Alex",
                 "Bosov",

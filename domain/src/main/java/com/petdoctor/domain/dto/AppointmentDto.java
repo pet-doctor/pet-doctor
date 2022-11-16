@@ -12,7 +12,8 @@ public class AppointmentDto {
     private DoctorDto doctorDto;
     private VetClinicDto vetClinicDto;
 
-    protected AppointmentDto() {}
+    protected AppointmentDto() {
+    }
 
     public AppointmentDto(Long id,
                           LocalDate startTime,

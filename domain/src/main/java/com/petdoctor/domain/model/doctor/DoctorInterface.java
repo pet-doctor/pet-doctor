@@ -4,7 +4,6 @@ import com.petdoctor.domain.model.appointment.AppointmentInfo;
 import com.petdoctor.domain.model.appointment.AppointmentInterface;
 
 import java.util.HashMap;
-import java.util.Map;
 
 
 public interface DoctorInterface extends DoctorInfo {

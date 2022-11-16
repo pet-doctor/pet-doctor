@@ -137,7 +137,6 @@ public class ClientServiceTest {
                 new ArrayList<>());
 
         Mockito.when(clientRepository.getReferenceById(1L)).thenReturn(clientEntity);
-        LocalDate localDate = LocalDate.of(2011, 1, 12);
 
         var repositoryReturnedEntity = new ClientEntity(1L,
                 "Alex",

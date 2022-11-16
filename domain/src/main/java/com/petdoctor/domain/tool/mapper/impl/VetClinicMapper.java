@@ -3,11 +3,7 @@ package com.petdoctor.domain.tool.mapper.impl;
 import com.petdoctor.data.entity.ClientEntity;
 import com.petdoctor.data.entity.DoctorEntity;
 import com.petdoctor.data.entity.VetClinicEntity;
-import com.petdoctor.domain.dto.ClientDto;
-import com.petdoctor.domain.dto.DoctorDto;
 import com.petdoctor.domain.dto.VetClinicDto;
-import com.petdoctor.domain.model.appointment.Appointment;
-import com.petdoctor.domain.model.appointment.AppointmentInterface;
 import com.petdoctor.domain.model.client.Client;
 import com.petdoctor.domain.model.client.ClientInterface;
 import com.petdoctor.domain.model.doctor.Doctor;
@@ -21,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 @Component
 @Scope("singleton")
@@ -48,7 +43,6 @@ public class VetClinicMapper extends AbstractMapper<VetClinicEntity, VetClinic, 
 
     @Override
     protected void mapSpecificFieldsToModelFromEntity(VetClinicEntity source, VetClinic destination) {
-
         if (source.getClientEntities() != null) {
             HashMap<Long, ClientInterface> hashMap = new HashMap<>();
             source.getClientEntities().forEach(client -> hashMap.put(client.getId(), mapper.map(client, Client.class)));
@@ -63,7 +57,6 @@ public class VetClinicMapper extends AbstractMapper<VetClinicEntity, VetClinic, 
 
     @Override
     protected void mapSpecificFieldsToEntityFromModel(VetClinic source, VetClinicEntity destination) {
-
         if (source.getClients() != null)
             destination.setClientEntities(source.getClients()
                     .values().stream().map(client -> mapper.map(client, ClientEntity.class))
@@ -76,13 +69,11 @@ public class VetClinicMapper extends AbstractMapper<VetClinicEntity, VetClinic, 
 
     @Override
     protected void mapSpecificFieldsToDtoFromModel(VetClinic source, VetClinicDto destination) {
-
         // TODO: we are unable to change VetClinicDto special fields
     }
 
     @Override
     protected void mapSpecificFieldsToModelFromDto(VetClinicDto source, VetClinic destination) {
-
         if (source.getClients() != null) {
             HashMap<Long, ClientInterface> hashMap = new HashMap<>();
             source.getClients().forEach(client -> hashMap.put(client.getId(), mapper.map(client, Client.class)));

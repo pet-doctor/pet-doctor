@@ -2,22 +2,18 @@ package com.petdoctor.domain.tool.mapper.impl;
 
 import com.petdoctor.data.entity.AppointmentEntity;
 import com.petdoctor.data.entity.DoctorEntity;
-import com.petdoctor.domain.dto.AppointmentDto;
 import com.petdoctor.domain.dto.DoctorDto;
 import com.petdoctor.domain.model.appointment.Appointment;
 import com.petdoctor.domain.model.appointment.AppointmentInterface;
 import com.petdoctor.domain.model.doctor.Doctor;
 import com.petdoctor.domain.tool.mapper.AbstractMapper;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.print.Doc;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 @Component
 @Scope("singleton")
@@ -73,12 +69,9 @@ public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto
 
     @Override
     protected void mapSpecificFieldsToModelFromDto(DoctorDto source, Doctor destination) {
-        // TODO: should we create some more converters for lite dtos???
-
         HashMap<Long, AppointmentInterface> hashMap = new HashMap<>();
         source.getAppointments().forEach(a -> hashMap.put(a.getId(), mapper.map(a, Appointment.class)));
         destination.setAppointments(hashMap);
-
 //        if (source.getAppointments() != null)
 //            destination.setAppointments(source.getAppointments()
 //                    .stream()

@@ -21,10 +21,10 @@ public class Doctor implements DoctorInterface {
     }
 
     /**
-     * @param id (Long) - unique identifier in the database
-     * @param name (String) - name of the doctor
-     * @param surname (String) - surname of the doctor
-     * @param email (String) - email of the doctor
+     * @param id           (Long) - unique identifier in the database
+     * @param name         (String) - name of the doctor
+     * @param surname      (String) - surname of the doctor
+     * @param email        (String) - email of the doctor
      * @param doctorOffice (Integer) - number of the doctor's office
      * @param appointments (Map Long, AppointmentInfo) - appointments that are related to current doctor
      */

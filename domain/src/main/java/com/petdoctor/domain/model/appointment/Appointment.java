@@ -20,12 +20,12 @@ public class Appointment implements AppointmentInterface {
     }
 
     /**
-     * @param id (Long) - unique identifier in the database
-     * @param startTime (LocalDate) - time when the appointment will be getting started
+     * @param id               (Long) - unique identifier in the database
+     * @param startTime        (LocalDate) - time when the appointment will be getting started
      * @param appointmentState (enum) - current state of the appointment (OPEN, TAKEN, CANCELED, CLOSED)
-     * @param client (ClientInfo) - information about client
-     * @param doctor (DoctorInfo) - information about doctor
-     * @param vetClinic (VetClinicInfo) - information about vet clinic
+     * @param client           (ClientInfo) - information about client
+     * @param doctor           (DoctorInfo) - information about doctor
+     * @param vetClinic        (VetClinicInfo) - information about vet clinic
      */
     public Appointment(Long id, LocalDate startTime, AppointmentState appointmentState,
                        ClientInfo client, DoctorInfo doctor, VetClinicInfo vetClinic) {

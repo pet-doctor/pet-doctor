@@ -43,7 +43,6 @@ public class AppointmentMapper extends AbstractMapper<AppointmentEntity, Appoint
 
     @Override
     protected void mapSpecificFieldsToModelFromEntity(AppointmentEntity source, Appointment destination) {
-
         if (source.getClientEntity() != null)
             destination.setClient(mapper.map(source.getClientEntity(), Client.class));
         if (source.getDoctorEntity() != null)
@@ -52,7 +51,6 @@ public class AppointmentMapper extends AbstractMapper<AppointmentEntity, Appoint
 
     @Override
     protected void mapSpecificFieldsToEntityFromModel(Appointment source, AppointmentEntity destination) {
-
         if (source.getClient() != null)
             destination.setClientEntity(mapper.map(source.getClient(), ClientEntity.class));
         if (source.getDoctor() != null)
@@ -61,13 +59,11 @@ public class AppointmentMapper extends AbstractMapper<AppointmentEntity, Appoint
 
     @Override
     protected void mapSpecificFieldsToDtoFromModel(Appointment source, AppointmentDto destination) {
-
         // TODO: we are unable to change AppointmentDto special fields
     }
 
     @Override
     protected void mapSpecificFieldsToModelFromDto(AppointmentDto source, Appointment destination) {
-
         // TODO: rename methods (getClient != getDoctorDto for Oleg)
         if (source.getClientDto() != null)
             destination.setClient(mapper.map(source.getClientDto(), Client.class));

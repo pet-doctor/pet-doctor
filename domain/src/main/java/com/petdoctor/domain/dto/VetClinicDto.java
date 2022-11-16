@@ -19,7 +19,8 @@ public class VetClinicDto {
         this.clients = clients;
     }
 
-    protected VetClinicDto() {}
+    protected VetClinicDto() {
+    }
 
     public Long getId() {
         return id;

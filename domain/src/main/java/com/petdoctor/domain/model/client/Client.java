@@ -13,11 +13,11 @@ public class Client implements ClientInterface {
     }
 
     /**
-     * @param id (Long) - unique identifier in the database
-     * @param name (String) - name of the doctor
-     * @param surname (String) - surname of the doctor
-     * @param email (String) - email of the doctor
-     * @param petName (String) - name of the pet
+     * @param id         (Long) - unique identifier in the database
+     * @param name       (String) - name of the doctor
+     * @param surname    (String) - surname of the doctor
+     * @param email      (String) - email of the doctor
+     * @param petName    (String) - name of the pet
      * @param petProblem (String) - current problem of the client's pet
      */
     public Client(Long id, String name, String surname, String email, String petName, String petProblem) {

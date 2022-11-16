@@ -73,17 +73,17 @@ public class DoctorMapperTest {
     void mapDtoToModel() {
         ArrayList<AppointmentDto> appointmentDtos = new ArrayList<>();
         appointmentDtos.add(new AppointmentDto(1L,
-                        LocalDate.now(),
-                        AppointmentState.OPEN,
-                        Mockito.any(ClientDto.class),
-                        Mockito.any(DoctorDto.class),
-                        Mockito.any(VetClinicDto.class)));
+                LocalDate.now(),
+                AppointmentState.OPEN,
+                Mockito.any(ClientDto.class),
+                Mockito.any(DoctorDto.class),
+                Mockito.any(VetClinicDto.class)));
         appointmentDtos.add(new AppointmentDto(2L,
-                        LocalDate.now(),
-                        AppointmentState.CLOSED,
-                        Mockito.any(ClientDto.class),
-                        Mockito.any(DoctorDto.class),
-                        Mockito.any(VetClinicDto.class)));
+                LocalDate.now(),
+                AppointmentState.CLOSED,
+                Mockito.any(ClientDto.class),
+                Mockito.any(DoctorDto.class),
+                Mockito.any(VetClinicDto.class)));
 
 
         DoctorDto doctorDto = new DoctorDto(1L,

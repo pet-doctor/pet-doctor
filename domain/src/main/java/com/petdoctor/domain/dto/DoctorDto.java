@@ -10,7 +10,8 @@ public class DoctorDto {
     private Integer doctorOffice;
     private ArrayList<AppointmentDto> appointments = new ArrayList<>();
 
-    protected DoctorDto() {}
+    protected DoctorDto() {
+    }
 
     public DoctorDto(Long id, String name, String surname, String email, Integer doctorOffice, ArrayList<AppointmentDto> appointments) {
         this.id = id;
@@ -20,7 +21,6 @@ public class DoctorDto {
         this.doctorOffice = doctorOffice;
         this.appointments = appointments;
     }
-
 
 
     public Long getId() {
