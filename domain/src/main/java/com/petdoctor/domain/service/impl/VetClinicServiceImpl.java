@@ -1,25 +1,15 @@
 package com.petdoctor.domain.service.impl;
 
-import com.petdoctor.data.entity.ClientEntity;
 import com.petdoctor.data.entity.VetClinicEntity;
-import com.petdoctor.data.repository.ClientRepository;
 import com.petdoctor.data.repository.VetClinicRepository;
 import com.petdoctor.domain.dto.ClientDto;
 import com.petdoctor.domain.dto.DoctorDto;
 import com.petdoctor.domain.dto.VetClinicDto;
-import com.petdoctor.domain.model.appointment.AppointmentInfo;
-import com.petdoctor.domain.model.client.Client;
-import com.petdoctor.domain.model.client.ClientInfo;
-import com.petdoctor.domain.model.doctor.Doctor;
-import com.petdoctor.domain.model.doctor.DoctorInfo;
 import com.petdoctor.domain.model.vet.clinic.VetClinic;
 import com.petdoctor.domain.model.vet.clinic.VetClinicInfo;
-import com.petdoctor.domain.model.vet.clinic.VetClinicInterface;
-import com.petdoctor.domain.service.DoctorService;
 import com.petdoctor.domain.service.VetClinicService;
 import com.petdoctor.domain.tool.exception.PetDoctorNotFoundException;
 import com.petdoctor.domain.tool.exception.PetDoctorNullException;
-import com.petdoctor.domain.tool.exception.PetDoctorValidationException;
 import com.petdoctor.domain.tool.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -29,8 +19,6 @@ import java.util.List;
 
 public class VetClinicServiceImpl implements VetClinicService {
 
-    private DoctorService doctorService;
-//    TODO: implement repositories
     private final VetClinicRepository vetClinicRepository;
     private final Mapper<VetClinicEntity, VetClinic, VetClinicDto> vetClinicMapper;
 
@@ -139,19 +127,5 @@ public class VetClinicServiceImpl implements VetClinicService {
         }
     }
 
-    public AppointmentInfo bookAppointment(AppointmentInfo appointment) {
-
-        if (appointment == null) {
-            throw new PetDoctorNullException("Appointment is null! :(");
-        }
-
-        if (!(appointment.getVetClinic() instanceof VetClinicInterface vetClinic)) {
-            throw new PetDoctorValidationException("Incorrect type of vetClinic was taken");
-        }
-
-//        TODO: add mapping with @Entities
-
-        return vetClinic.bookAppointment(appointment);
-    }
-
+//    TODO: add book appointment
 }

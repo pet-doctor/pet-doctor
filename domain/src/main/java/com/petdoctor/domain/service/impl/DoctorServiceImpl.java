@@ -3,10 +3,7 @@ package com.petdoctor.domain.service.impl;
 import com.petdoctor.data.entity.DoctorEntity;
 import com.petdoctor.data.repository.DoctorRepository;
 import com.petdoctor.domain.dto.AppointmentDto;
-import com.petdoctor.domain.dto.ClientDto;
 import com.petdoctor.domain.dto.DoctorDto;
-import com.petdoctor.domain.model.client.Client;
-import com.petdoctor.domain.model.client.ClientInfo;
 import com.petdoctor.domain.model.doctor.Doctor;
 import com.petdoctor.domain.model.doctor.DoctorInfo;
 import com.petdoctor.domain.service.DoctorService;
@@ -38,7 +35,7 @@ public class DoctorServiceImpl implements DoctorService {
         List<DoctorInfo> doctorInfos = doctorRepository
                 .findAll()
                 .stream()
-                .map(appointmentEntity -> (DoctorInfo) doctorMapper.toModelFromEntity(appointmentEntity))
+                .map(doctorEntity -> (DoctorInfo) doctorMapper.toModelFromEntity(doctorEntity))
                 .toList();
 
         return doctorInfos
@@ -69,9 +66,9 @@ public class DoctorServiceImpl implements DoctorService {
         }
 
         DoctorInfo doctorInfo = doctorMapper.toModelFromDto(doctorDto);
-        var appointmentEntity =
+        var doctorEntity =
                 doctorRepository.save(doctorMapper.toEntityFromModel((Doctor) doctorInfo));
-        return doctorMapper.toDtoFromModel(doctorMapper.toModelFromEntity(appointmentEntity));
+        return doctorMapper.toDtoFromModel(doctorMapper.toModelFromEntity(doctorEntity));
     }
 
     @Override

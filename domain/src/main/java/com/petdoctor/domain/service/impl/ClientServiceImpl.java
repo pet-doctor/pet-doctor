@@ -33,7 +33,7 @@ public class ClientServiceImpl implements ClientService {
         List<ClientInfo> clientInfos = clientRepository
                 .findAll()
                 .stream()
-                .map(appointmentEntity -> (ClientInfo) clientMapper.toModelFromEntity(appointmentEntity))
+                .map(clientEntity -> (ClientInfo) clientMapper.toModelFromEntity(clientEntity))
                 .toList();
 
         return clientInfos
@@ -59,19 +59,19 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ClientDto saveClient(ClientDto clientDto) {
         if (clientDto == null) {
-            throw new PetDoctorNullException("the appointmentDto is null!");
+            throw new PetDoctorNullException("the clientDto is null!");
         }
 
         ClientInfo clientInfo = clientMapper.toModelFromDto(clientDto);
-        var appointmentEntity =
+        var clientEntity =
                 clientRepository.save(clientMapper.toEntityFromModel((Client) clientInfo));
-        return clientMapper.toDtoFromModel(clientMapper.toModelFromEntity(appointmentEntity));
+        return clientMapper.toDtoFromModel(clientMapper.toModelFromEntity(clientEntity));
     }
 
     @Override
     public ClientDto updateClient(ClientDto clientDto) {
         if (clientDto == null) {
-            throw new PetDoctorNullException("the appointmentDto is null!");
+            throw new PetDoctorNullException("the clientDto is null!");
         }
 
         try {
@@ -112,9 +112,9 @@ public class ClientServiceImpl implements ClientService {
             ClientInfo updatedClientInfo =
                     clientMapper.toModelFromDto(updatedClientDto);
 
-            var updatedAppointmentEntity =
+            var updatedClientEntity =
                     clientRepository.save(clientMapper.toEntityFromModel((Client) updatedClientInfo));
-            return clientMapper.toDtoFromModel(clientMapper.toModelFromEntity(updatedAppointmentEntity));
+            return clientMapper.toDtoFromModel(clientMapper.toModelFromEntity(updatedClientEntity));
         } catch (Exception e) {
             throw new PetDoctorNotFoundException(clientDto.getId().toString());
         }
