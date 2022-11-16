@@ -1,22 +1,25 @@
 package com.petdoctor.domain.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VetClinicDto {
-    final private Long id;
-    final private String address;
-    final private String email;
-    final private List<DoctorDto> doctors;
-    final private List<ClientDto> clients;
+    private Long id;
+    private String address;
+    private String email;
+    private ArrayList<DoctorDto> doctors;
+    private ArrayList<ClientDto> clients;
 
 
-    public VetClinicDto(Long id, String address, String email, List<DoctorDto> doctors, List<ClientDto> clients) {
+    public VetClinicDto(Long id, String address, String email, ArrayList<DoctorDto> doctors, ArrayList<ClientDto> clients) {
         this.id = id;
         this.address = address;
         this.email = email;
         this.doctors = doctors;
         this.clients = clients;
     }
+
+    protected VetClinicDto() {}
 
     public Long getId() {
         return id;
@@ -30,11 +33,11 @@ public class VetClinicDto {
         return email;
     }
 
-    public List<DoctorDto> getDoctors() {
+    public ArrayList<DoctorDto> getDoctors() {
         return doctors;
     }
 
-    public List<ClientDto> getClients() {
+    public ArrayList<ClientDto> getClients() {
         return clients;
     }
 }

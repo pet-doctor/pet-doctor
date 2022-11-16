@@ -16,6 +16,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -81,8 +82,8 @@ public class VetClinicServiceImpl implements VetClinicService {
             VetClinicDto oldVetClinic = this.getVetClinicById(vetClinicDto.getId());
             String address = oldVetClinic.getAddress();
             String email = oldVetClinic.getEmail();
-            List<ClientDto> clients = oldVetClinic.getClients();
-            List<DoctorDto> doctors = oldVetClinic.getDoctors();
+            ArrayList<ClientDto> clients = oldVetClinic.getClients();
+            ArrayList<DoctorDto> doctors = oldVetClinic.getDoctors();
 
             if (oldVetClinic.getAddress() != null) {
                 address = vetClinicDto.getAddress();
