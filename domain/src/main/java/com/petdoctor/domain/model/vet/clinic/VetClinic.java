@@ -8,6 +8,7 @@ import com.petdoctor.domain.model.doctor.DoctorInterface;
 import com.petdoctor.domain.tool.exception.PetDoctorNullException;
 import com.petdoctor.domain.tool.exception.PetDoctorValidationException;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class VetClinic implements VetClinicInterface {
@@ -15,8 +16,8 @@ public class VetClinic implements VetClinicInterface {
     private Long id;
     private String address;
     private String email;
-    private Map<Long, DoctorInterface> doctors;
-    private Map<Long, ClientInterface> clients;
+    private HashMap<Long, DoctorInterface> doctors;
+    private HashMap<Long, ClientInterface> clients;
 
     public VetClinic() {
     }
@@ -28,7 +29,7 @@ public class VetClinic implements VetClinicInterface {
      * @param doctors (Map Long, DoctorInterface) - information about doctors, that are mapped with their ids'
      * @param clients (Map Long, ClientInterface) - information about clients, that are mapped with their ids'
      */
-    public VetClinic(Long id, String address, String email, Map<Long, DoctorInterface> doctors, Map<Long, ClientInterface> clients) {
+    public VetClinic(Long id, String address, String email, HashMap<Long, DoctorInterface> doctors, HashMap<Long, ClientInterface> clients) {
         this.id = id;
         this.address = address;
         this.email = email;
@@ -77,12 +78,12 @@ public class VetClinic implements VetClinicInterface {
     }
 
     @Override
-    public void setDoctors(Map<Long, DoctorInterface> doctors) {
+    public void setDoctors(HashMap<Long, DoctorInterface> doctors) {
         this.doctors = doctors;
     }
 
     @Override
-    public void setClients(Map<Long, ClientInterface> clients) {
+    public void setClients(HashMap<Long, ClientInterface> clients) {
         this.clients = clients;
     }
 

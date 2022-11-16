@@ -6,7 +6,7 @@ import com.petdoctor.domain.model.client.ClientInterface;
 import com.petdoctor.domain.model.doctor.DoctorInfo;
 import com.petdoctor.domain.model.doctor.DoctorInterface;
 
-import java.util.Map;
+import java.util.HashMap;
 
 public interface VetClinicInterface extends VetClinicInfo {
 
@@ -16,9 +16,9 @@ public interface VetClinicInterface extends VetClinicInfo {
 
     void setEmail(String email);
 
-    void setDoctors(Map<Long, DoctorInterface> doctors);
+    void setDoctors(HashMap<Long, DoctorInterface> doctors);
 
-    void setClients(Map<Long, ClientInterface> clients);
+    void setClients(HashMap<Long, ClientInterface> clients);
 
     AppointmentInfo closeAppointment(AppointmentInfo appointmentInfo);
 

@@ -6,8 +6,12 @@ import com.petdoctor.data.entity.VetClinicEntity;
 import com.petdoctor.domain.dto.ClientDto;
 import com.petdoctor.domain.dto.DoctorDto;
 import com.petdoctor.domain.dto.VetClinicDto;
+import com.petdoctor.domain.model.appointment.Appointment;
+import com.petdoctor.domain.model.appointment.AppointmentInterface;
 import com.petdoctor.domain.model.client.Client;
+import com.petdoctor.domain.model.client.ClientInterface;
 import com.petdoctor.domain.model.doctor.Doctor;
+import com.petdoctor.domain.model.doctor.DoctorInterface;
 import com.petdoctor.domain.model.vet.clinic.VetClinic;
 import com.petdoctor.domain.tool.mapper.AbstractMapper;
 import org.modelmapper.ModelMapper;
@@ -16,6 +20,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 
 @Component
@@ -44,14 +49,16 @@ public class VetClinicMapper extends AbstractMapper<VetClinicEntity, VetClinic, 
     @Override
     protected void mapSpecificFieldsToModelFromEntity(VetClinicEntity source, VetClinic destination) {
 
-        if (source.getClientEntities() != null)
-            destination.setClients(source.getClientEntities()
-                    .stream().collect(Collectors.toMap(ClientEntity::getId,
-                            clientEntity -> mapper.map(clientEntity, Client.class))));
-        if (source.getDoctorEntities() != null)
-            destination.setDoctors(source.getDoctorEntities()
-                    .stream().collect(Collectors.toMap(DoctorEntity::getId,
-                            doctorEntity -> mapper.map(doctorEntity, Doctor.class))));
+        if (source.getClientEntities() != null) {
+            HashMap<Long, ClientInterface> hashMap = new HashMap<>();
+            source.getClientEntities().forEach(client -> hashMap.put(client.getId(), mapper.map(client, Client.class)));
+            destination.setClients(hashMap);
+        }
+        if (source.getDoctorEntities() != null) {
+            HashMap<Long, DoctorInterface> hashMap = new HashMap<>();
+            source.getClientEntities().forEach(doctor -> hashMap.put(doctor.getId(), mapper.map(doctor, Doctor.class)));
+            destination.setDoctors(hashMap);
+        }
     }
 
     @Override
@@ -76,13 +83,15 @@ public class VetClinicMapper extends AbstractMapper<VetClinicEntity, VetClinic, 
     @Override
     protected void mapSpecificFieldsToModelFromDto(VetClinicDto source, VetClinic destination) {
 
-        if (source.getClients() != null)
-            destination.setClients(source.getClients()
-                    .stream().collect(Collectors.toMap(ClientDto::getId,
-                            clientDto -> mapper.map(clientDto, Client.class))));
-        if (source.getDoctors() != null)
-            destination.setDoctors(source.getDoctors()
-                    .stream().collect(Collectors.toMap(DoctorDto::getId,
-                            doctorDto -> mapper.map(doctorDto, Doctor.class))));
+        if (source.getClients() != null) {
+            HashMap<Long, ClientInterface> hashMap = new HashMap<>();
+            source.getClients().forEach(client -> hashMap.put(client.getId(), mapper.map(client, Client.class)));
+            destination.setClients(hashMap);
+        }
+        if (source.getDoctors() != null) {
+            HashMap<Long, DoctorInterface> hashMap = new HashMap<>();
+            source.getDoctors().forEach(doctor -> hashMap.put(doctor.getId(), mapper.map(doctor, Doctor.class)));
+            destination.setDoctors(hashMap);
+        }
     }
 }
