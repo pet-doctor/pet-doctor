@@ -1,4 +1,4 @@
-package com.petdoctor.domain;
+package com.petdoctor.domain.service;
 
 import com.petdoctor.data.entity.VetClinicEntity;
 import com.petdoctor.data.repository.VetClinicRepository;

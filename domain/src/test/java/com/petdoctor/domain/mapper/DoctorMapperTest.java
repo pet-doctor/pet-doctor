@@ -1,4 +1,4 @@
-package com.petdoctor.domain;
+package com.petdoctor.domain.mapper;
 
 import com.petdoctor.data.entity.AppointmentEntity;
 import com.petdoctor.data.entity.AppointmentState;
