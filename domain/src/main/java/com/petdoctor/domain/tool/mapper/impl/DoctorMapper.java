@@ -2,6 +2,7 @@ package com.petdoctor.domain.tool.mapper.impl;
 
 import com.petdoctor.data.entity.AppointmentEntity;
 import com.petdoctor.data.entity.DoctorEntity;
+import com.petdoctor.domain.dto.AppointmentDto;
 import com.petdoctor.domain.dto.DoctorDto;
 import com.petdoctor.domain.model.appointment.Appointment;
 import com.petdoctor.domain.model.appointment.AppointmentInterface;
@@ -64,7 +65,8 @@ public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto
 
     @Override
     protected void mapSpecificFieldsToDtoFromModel(Doctor source, DoctorDto destination) {
-        // TODO: we are unable to change DoctorDto special fields
+        // TODO: genius idea but i dont know how do it normally
+        source.getAppointments().values().forEach(a -> destination.getAppointments().add(mapper.map(a, AppointmentDto.class)));
     }
 
     @Override
