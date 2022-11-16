@@ -1,7 +1,6 @@
 package com.petdoctor.domain.dto;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class VetClinicDto {
     private Long id;

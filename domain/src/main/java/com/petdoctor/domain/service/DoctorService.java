@@ -5,7 +5,6 @@ import com.petdoctor.domain.dto.DoctorDto;
 import java.util.List;
 
 public interface DoctorService {
-
     /**
      * @return List<DoctorDto>
      */

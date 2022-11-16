@@ -19,7 +19,6 @@ import java.util.HashMap;
 @Component
 @Scope("singleton")
 public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto> {
-
     @Autowired
     public DoctorMapper(ModelMapper modelMapper) {
         super(DoctorEntity.class, Doctor.class, DoctorDto.class);
@@ -48,10 +47,6 @@ public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto
             source.getAppointmentEntities().forEach(a -> hashMap.put(a.getId(), mapper.map(a, Appointment.class)));
             destination.setAppointments(hashMap);
         }
-//        if (source.getAppointmentEntities() != null)
-//            destination.setAppointments(source.getAppointmentEntities()
-//                    .stream()
-//                    .collect(Collectors.toMap(AppointmentEntity::getId, elem -> mapper.map(elem, Appointment.class))));
     }
 
     @Override
@@ -74,14 +69,5 @@ public class DoctorMapper extends AbstractMapper<DoctorEntity, Doctor, DoctorDto
         HashMap<Long, AppointmentInterface> hashMap = new HashMap<>();
         source.getAppointments().forEach(a -> hashMap.put(a.getId(), mapper.map(a, Appointment.class)));
         destination.setAppointments(hashMap);
-//        if (source.getAppointments() != null)
-//            destination.setAppointments(source.getAppointments()
-//                    .stream()
-//                    .collect(Collectors.toMap(AppointmentDto::getId, elem -> mapper.map(elem, Appointment.class))));
-
-//        if (source.getAppointments() == null)
-//            destination.setAppointments(source.getAppointments()
-//                    .stream()
-//                    .collect(Collectors.toMap(AppointmentDto::getId, elem -> mapper.map(elem, Appointment.class))));
     }
 }

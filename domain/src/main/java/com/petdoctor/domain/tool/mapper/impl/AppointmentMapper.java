@@ -19,7 +19,6 @@ import javax.annotation.PostConstruct;
 @Component
 @Scope("singleton")
 public class AppointmentMapper extends AbstractMapper<AppointmentEntity, Appointment, AppointmentDto> {
-
     @Autowired
     public AppointmentMapper(ModelMapper modelMapper) {
         super(AppointmentEntity.class, Appointment.class, AppointmentDto.class);

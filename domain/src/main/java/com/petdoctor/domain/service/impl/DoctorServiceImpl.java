@@ -8,7 +8,6 @@ import com.petdoctor.domain.dto.DoctorDto;
 import com.petdoctor.domain.model.appointment.Appointment;
 import com.petdoctor.domain.model.doctor.Doctor;
 import com.petdoctor.domain.model.doctor.DoctorInfo;
-import com.petdoctor.domain.service.AppointmentService;
 import com.petdoctor.domain.service.DoctorService;
 import com.petdoctor.domain.tool.exception.PetDoctorNotFoundException;
 import com.petdoctor.domain.tool.exception.PetDoctorNullException;

@@ -21,7 +21,6 @@ import java.util.HashMap;
 @Component
 @Scope("singleton")
 public class VetClinicMapper extends AbstractMapper<VetClinicEntity, VetClinic, VetClinicDto> {
-
     @Autowired
     public VetClinicMapper(ModelMapper modelMapper) {
         super(VetClinicEntity.class, VetClinic.class, VetClinicDto.class);

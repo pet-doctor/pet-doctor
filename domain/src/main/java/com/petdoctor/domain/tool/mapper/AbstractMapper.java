@@ -8,7 +8,6 @@ import java.util.Objects;
 
 
 public abstract class AbstractMapper<E, M, D> implements Mapper<E, M, D> {
-
     @Autowired
     protected ModelMapper mapper;
 

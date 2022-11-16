@@ -8,7 +8,6 @@ import com.petdoctor.domain.model.vet.clinic.VetClinicInfo;
 import java.time.LocalDate;
 
 public class Appointment implements AppointmentInterface {
-
     private Long id;
     private LocalDate startTime;
     private AppointmentState appointmentState;

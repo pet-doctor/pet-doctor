@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class ClientMapperTest {
-
     @Autowired
     private Mapper<ClientEntity, Client, ClientDto> clientMapper;
 

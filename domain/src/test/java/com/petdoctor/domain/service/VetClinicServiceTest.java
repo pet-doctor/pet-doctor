@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class VetClinicServiceTest {
-
     @MockBean
     private VetClinicRepository vetClinicRepository;
 

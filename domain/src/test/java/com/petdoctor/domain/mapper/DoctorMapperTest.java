@@ -26,7 +26,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 public class DoctorMapperTest {
-
     @Autowired
     private Mapper<DoctorEntity, Doctor, DoctorDto> doctorMapper;
 

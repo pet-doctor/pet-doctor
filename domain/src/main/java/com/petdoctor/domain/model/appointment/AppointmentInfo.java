@@ -9,7 +9,6 @@ import java.time.LocalDate;
 
 
 public interface AppointmentInfo {
-
     Long getId();
 
     LocalDate getStartTime();

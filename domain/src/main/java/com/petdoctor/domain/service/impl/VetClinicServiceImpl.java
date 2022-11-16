@@ -21,7 +21,6 @@ import java.util.List;
 
 @Service
 public class VetClinicServiceImpl implements VetClinicService {
-
     private final VetClinicRepository vetClinicRepository;
     private final Mapper<VetClinicEntity, VetClinic, VetClinicDto> vetClinicMapper;
 

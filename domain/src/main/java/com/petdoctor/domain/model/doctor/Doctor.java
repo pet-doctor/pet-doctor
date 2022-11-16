@@ -8,7 +8,6 @@ import com.petdoctor.domain.tool.exception.PetDoctorValidationException;
 import java.util.HashMap;
 
 public class Doctor implements DoctorInterface {
-
     private Long id;
     private String name;
     private String surname;

@@ -18,7 +18,6 @@ import java.util.List;
 
 @Service
 public class ClientServiceImpl implements ClientService {
-
     private final ClientRepository clientRepository;
     private final Mapper<ClientEntity, Client, ClientDto> clientMapper;
 

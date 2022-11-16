@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VetClinic implements VetClinicInterface {
-
     private Long id;
     private String address;
     private String email;
@@ -93,7 +92,6 @@ public class VetClinic implements VetClinicInterface {
      */
     @Override
     public AppointmentInfo closeAppointment(AppointmentInfo appointmentInfo) {
-
         if (appointmentInfo == null) {
             throw new PetDoctorNullException("AppointmentInfo is null!");
         }
@@ -108,8 +106,7 @@ public class VetClinic implements VetClinicInterface {
             throw new PetDoctorNullException("Related doctor isn't exist");
         }
 
-        AppointmentInfo appointmentInfoResult = doctor.closeAppointment(appointmentInfo);
-        return appointmentInfoResult;
+        return doctor.closeAppointment(appointmentInfo);
     }
 
     /**
@@ -118,33 +115,6 @@ public class VetClinic implements VetClinicInterface {
      */
     @Override
     public AppointmentInfo bookAppointment(AppointmentInfo appointmentInfo) {
-
-        if (appointmentInfo == null) {
-            throw new PetDoctorNullException("AppointmentInfo is null!");
-        }
-
-
-        if (!(appointmentInfo.getDoctor() instanceof DoctorInterface)) {
-            throw new PetDoctorValidationException("Incorrect type of AppointmentInfo was taken");
-        }
-
-        DoctorInterface doctor = doctors.get(appointmentInfo.getDoctor().getId());
-
-        if (doctor == null) {
-            throw new PetDoctorNullException("Related doctor isn't exist");
-        }
-
-        AppointmentInfo appointmentInfoResult = doctor.bookAppointment(appointmentInfo);
-        return appointmentInfoResult;
-    }
-
-    /**
-     * @param appointmentInfo (AppointmentInfo) - information about appointment
-     * @return (AppointmentInfo) after appointment is added
-     */
-    @Override
-    public AppointmentInfo addAppointment(AppointmentInfo appointmentInfo) {
-
         if (appointmentInfo == null) {
             throw new PetDoctorNullException("AppointmentInfo is null!");
         }
@@ -159,76 +129,6 @@ public class VetClinic implements VetClinicInterface {
             throw new PetDoctorNullException("Related doctor isn't exist");
         }
 
-        AppointmentInfo appointmentInfoResult = doctor.addAppointment(appointmentInfo);
-        return appointmentInfoResult;
-    }
-
-    /**
-     * @param appointmentInfo (AppointmentInfo) - information about appointment
-     */
-    @Override
-    public void deleteAppointment(AppointmentInfo appointmentInfo) {
-
-        if (appointmentInfo == null) {
-            throw new PetDoctorNullException("AppointmentInfo is null!");
-        }
-
-        if (!(appointmentInfo.getDoctor() instanceof DoctorInterface)) {
-            throw new PetDoctorValidationException("Incorrect type of AppointmentInfo was taken");
-        }
-
-        DoctorInterface doctor = doctors.get(appointmentInfo.getDoctor().getId());
-
-        if (doctor == null) {
-            throw new PetDoctorNullException("Related doctor isn't exist");
-        }
-
-        doctor.deleteAppointment(appointmentInfo);
-    }
-
-    /**
-     * @param doctor (DoctorInfo) - information about doctor
-     * @return (DoctorInfo) after doctor is added
-     */
-    @Override
-    public DoctorInfo addDoctor(DoctorInfo doctor) {
-
-        if (doctor == null) {
-            throw new PetDoctorNullException("Doctor is null! :(");
-        }
-
-        if (!(doctor instanceof DoctorInterface doctorInterface)) {
-            throw new PetDoctorValidationException("Incorrect type of Doctor was taken");
-        }
-
-        if (doctors.containsKey(doctorInterface.getId())) {
-            throw new PetDoctorValidationException("Doctor has already added");
-        }
-
-        doctors.put(doctorInterface.getId(), doctorInterface);
-        return doctorInterface;
-    }
-
-    /**
-     * @param client (ClientInfo) - information about client
-     * @return (ClientInfo) after client is added
-     */
-    @Override
-    public ClientInfo addClient(ClientInfo client) {
-
-        if (client == null) {
-            throw new PetDoctorNullException("Client is null! :(");
-        }
-
-        if (!(client instanceof ClientInterface clientInterface)) {
-            throw new PetDoctorValidationException("Incorrect type of Client was taken");
-        }
-
-        if (clients.containsKey(clientInterface.getId())) {
-            throw new PetDoctorValidationException("Client has already added");
-        }
-
-        clients.put(clientInterface.getId(), clientInterface);
-        return clientInterface;
+        return doctor.bookAppointment(appointmentInfo);
     }
 }

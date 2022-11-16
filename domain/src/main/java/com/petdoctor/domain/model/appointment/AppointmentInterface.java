@@ -8,7 +8,6 @@ import com.petdoctor.domain.model.vet.clinic.VetClinicInfo;
 import java.time.LocalDate;
 
 public interface AppointmentInterface extends AppointmentInfo {
-
     void setId(Long id);
 
     void setStartTime(LocalDate startTime);

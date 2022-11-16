@@ -9,7 +9,6 @@ import com.petdoctor.domain.model.doctor.DoctorInterface;
 import java.util.HashMap;
 
 public interface VetClinicInterface extends VetClinicInfo {
-
     void setId(Long id);
 
     void setAddress(String address);
@@ -23,12 +22,4 @@ public interface VetClinicInterface extends VetClinicInfo {
     AppointmentInfo closeAppointment(AppointmentInfo appointmentInfo);
 
     AppointmentInfo bookAppointment(AppointmentInfo appointmentInfo);
-
-    AppointmentInfo addAppointment(AppointmentInfo appointmentInfo);
-
-    void deleteAppointment(AppointmentInfo appointmentInfo);
-
-    DoctorInfo addDoctor(DoctorInfo doctor);
-
-    ClientInfo addClient(ClientInfo client);
 }

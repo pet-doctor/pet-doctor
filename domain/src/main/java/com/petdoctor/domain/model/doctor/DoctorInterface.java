@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 
 public interface DoctorInterface extends DoctorInfo {
-
     void setId(Long id);
 
     void setName(String name);

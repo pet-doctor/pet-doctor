@@ -1,7 +1,6 @@
 package com.petdoctor.domain.model.client;
 
 public interface ClientInfo {
-
     Long getId();
 
     String getName();
