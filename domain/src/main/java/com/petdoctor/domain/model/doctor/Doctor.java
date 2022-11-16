@@ -6,7 +6,6 @@ import com.petdoctor.data.entity.AppointmentState;
 import com.petdoctor.domain.tool.exception.PetDoctorValidationException;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class Doctor implements DoctorInterface {
 
@@ -31,6 +30,7 @@ public class Doctor implements DoctorInterface {
     public Doctor(Long id, String name, String surname, String email, Integer doctorOffice, HashMap<Long, AppointmentInterface> appointments) {
         this.id = id;
         this.name = name;
+        this.surname = surname;
         this.email = email;
         this.doctorOffice = doctorOffice;
         this.appointments = appointments;
@@ -86,24 +86,6 @@ public class Doctor implements DoctorInterface {
         this.appointments = appointments;
     }
 
-    /**
-     * @param appointmentInfo (AppointmentInfo) - abstraction of the Appointment that is only able to get fields
-     * @return AppointmentInfo, after our appointment has been added by doctor
-     */
-    @Override
-    public AppointmentInfo addAppointment(AppointmentInfo appointmentInfo) {
-
-        if (!(appointmentInfo instanceof AppointmentInterface)) {
-            throw new PetDoctorValidationException("Incorrect type of Appointment was taken");
-        }
-
-        if (appointments.containsKey(appointmentInfo.getId())) {
-            throw new PetDoctorValidationException("Appointment has already added");
-        }
-
-        appointments.put(appointmentInfo.getId(), (AppointmentInterface) appointmentInfo);
-        return appointmentInfo;
-    }
 
     /**
      * @param appointmentInfo (AppointmentInfo) - abstraction of the Appointment that is only able to get fields
@@ -143,23 +125,6 @@ public class Doctor implements DoctorInterface {
         ((AppointmentInterface) appointmentInfo).setAppointmentState(AppointmentState.CLOSED);
         appointments.get(appointmentInfo.getId()).setAppointmentState(AppointmentState.CLOSED);
         return appointmentInfo;
-    }
-
-    /**
-     * @param appointmentInfo (AppointmentInfo) - abstraction of the Appointment that is only able to get fields
-     */
-    @Override
-    public void deleteAppointment(AppointmentInfo appointmentInfo) {
-
-        if (!(appointmentInfo instanceof AppointmentInterface)) {
-            throw new PetDoctorValidationException("Incorrect type of Appointment was taken");
-        }
-
-        if (!appointments.containsKey(appointmentInfo.getId())) {
-            throw new PetDoctorValidationException("Appointments doesn't contains the appointment");
-        }
-
-        appointments.remove(appointmentInfo.getId());
     }
 
     public String getSurname() {
