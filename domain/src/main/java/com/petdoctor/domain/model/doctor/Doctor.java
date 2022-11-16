@@ -46,6 +46,10 @@ public class Doctor implements DoctorInterface {
         return this.name;
     }
 
+    public String getSurname() {
+        return surname;
+    }
+
     @Override
     public String getEmail() {
         return this.email;
@@ -69,6 +73,10 @@ public class Doctor implements DoctorInterface {
     @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     @Override
@@ -125,13 +133,5 @@ public class Doctor implements DoctorInterface {
         ((AppointmentInterface) appointmentInfo).setAppointmentState(AppointmentState.CLOSED);
         appointments.get(appointmentInfo.getId()).setAppointmentState(AppointmentState.CLOSED);
         return appointmentInfo;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 }

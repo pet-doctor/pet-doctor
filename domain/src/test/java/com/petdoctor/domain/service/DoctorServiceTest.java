@@ -1,7 +1,10 @@
 package com.petdoctor.domain.service;
 
+import com.petdoctor.data.entity.AppointmentEntity;
+import com.petdoctor.data.entity.AppointmentState;
 import com.petdoctor.data.entity.DoctorEntity;
 import com.petdoctor.data.repository.DoctorRepository;
+import com.petdoctor.domain.dto.AppointmentDto;
 import com.petdoctor.domain.dto.DoctorDto;
 import com.petdoctor.domain.service.impl.DoctorServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -163,13 +167,13 @@ public class DoctorServiceTest {
         var expectedDoctorEmail = "genius@gmail.com";
         var expectedDoctorDoctorOffice = 4;
 
-
         var newDoctorDto = new DoctorDto(1L,
                 "Oled",
                 "Display",
                 null,
                 4,
                 new ArrayList<>());
+
         DoctorDto doctorDto = doctorService.updateDoctor(newDoctorDto);
 
         assertEquals(expectedDoctorId, doctorDto.getId());
@@ -183,5 +187,71 @@ public class DoctorServiceTest {
     public void deleteDoctorById() {
         doctorService.deleteDoctorById(1L);
         Mockito.verify(doctorRepository, Mockito.times(1)).deleteById(1L);
+    }
+
+    @Test
+    public void bookAppointment() {
+        var appointmentEntity = new AppointmentEntity(1L,
+                LocalDate.now(),
+                AppointmentState.OPEN,
+                null,
+                null);
+
+        var doctorEntity = new DoctorEntity(1L,
+                "Alex",
+                "Bosoc",
+                "genius@gmail.com",
+                2,
+                List.of(appointmentEntity),
+                null);
+
+        Mockito.when(doctorRepository.getReferenceById(1L)).thenReturn(doctorEntity);
+        DoctorDto doctorDto = doctorService.getDoctorById(1L);
+
+        AppointmentState expectedAppointmentState = AppointmentState.TAKEN;
+
+        var appointmentDto = new AppointmentDto(1L,
+                LocalDate.now(),
+                AppointmentState.OPEN,
+                null,
+                doctorDto,
+                null);
+
+        AppointmentDto bookedAppointmentDto = doctorService.bookAppointment(appointmentDto);
+
+        assertEquals(expectedAppointmentState, bookedAppointmentDto.getAppointmentState());
+    }
+
+    @Test
+    public void closeAppointment() {
+        var appointmentEntity = new AppointmentEntity(1L,
+                LocalDate.now(),
+                AppointmentState.OPEN,
+                null,
+                null);
+
+        var doctorEntity = new DoctorEntity(1L,
+                "Alex",
+                "Bosoc",
+                "genius@gmail.com",
+                2,
+                List.of(appointmentEntity),
+                null);
+
+        Mockito.when(doctorRepository.getReferenceById(1L)).thenReturn(doctorEntity);
+        DoctorDto doctorDto = doctorService.getDoctorById(1L);
+
+        AppointmentState expectedAppointmentState = AppointmentState.CLOSED;
+
+        var appointmentDto = new AppointmentDto(1L,
+                LocalDate.now(),
+                AppointmentState.CLOSED,
+                null,
+                doctorDto,
+                null);
+
+        AppointmentDto bookedAppointmentDto = doctorService.closeAppointment(appointmentDto);
+
+        assertEquals(expectedAppointmentState, bookedAppointmentDto.getAppointmentState());
     }
 }
