@@ -106,7 +106,7 @@ public class ClientServiceTest {
     }
 
     @Test
-    public void getAppointmentById() {
+    public void getClientById() {
         var clientEntity = new ClientEntity(1L,
                 "Oleg",
                 "Podik",
@@ -127,7 +127,7 @@ public class ClientServiceTest {
     }
 
     @Test
-    public void updateAppointment() {
+    public void updateClient() {
         var clientEntity = new ClientEntity(1L,
                 "Oleg",
                 "Podik",
@@ -167,7 +167,7 @@ public class ClientServiceTest {
     }
 
     @Test
-    public void deleteAppointmentById() {
+    public void deleteClientById() {
         clientService.deleteClientById(1L);
         Mockito.verify(clientRepository, Mockito.times(1)).deleteById(1L);
     }

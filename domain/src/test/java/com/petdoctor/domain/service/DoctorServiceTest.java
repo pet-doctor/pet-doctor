@@ -1,10 +1,8 @@
 package com.petdoctor.domain.service;
 
 import com.petdoctor.data.entity.DoctorEntity;
-import com.petdoctor.data.entity.VetClinicEntity;
 import com.petdoctor.data.repository.DoctorRepository;
 import com.petdoctor.domain.dto.DoctorDto;
-import com.petdoctor.domain.dto.VetClinicDto;
 import com.petdoctor.domain.service.impl.DoctorServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -19,13 +17,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class DoctorServiceTest {
-
     @MockBean
     DoctorRepository doctorRepository;
 
     @Autowired
     DoctorServiceImpl doctorService;
-
 
     @Test
     public void saveDoctor() {

@@ -9,9 +9,7 @@ import com.petdoctor.domain.dto.AppointmentDto;
 import com.petdoctor.domain.dto.ClientDto;
 import com.petdoctor.domain.dto.DoctorDto;
 import com.petdoctor.domain.dto.VetClinicDto;
-import com.petdoctor.domain.model.appointment.Appointment;
 import com.petdoctor.domain.service.impl.AppointmentServiceImpl;
-import com.petdoctor.domain.tool.mapper.Mapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class AppointmentServiceTest {
-
     @MockBean
     private AppointmentRepository appointmentRepository;
 
@@ -35,7 +32,6 @@ public class AppointmentServiceTest {
 
     @Test
     public void saveAppointment() {
-
         var doctorEntity = new DoctorEntity(1L,
                 "Alex",
                 "Bosov",

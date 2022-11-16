@@ -114,7 +114,7 @@ public class VetClinicServiceTest {
     }
 
     @Test
-    public void deleteAppointmentById() {
+    public void deleteVetClinicById() {
         vetClinicRepository.deleteById(1L);
         Mockito.verify(vetClinicRepository, Mockito.times(1)).deleteById(1L);
     }
