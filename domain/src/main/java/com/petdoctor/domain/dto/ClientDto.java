@@ -8,7 +8,7 @@ public class ClientDto {
     private String petName;
     private String petProblem;
 
-    public ClientDto() {}
+    protected ClientDto() {}
 
     public ClientDto(Long id, String name, String surname, String email, String petName, String petProblem) {
         this.id = id;
