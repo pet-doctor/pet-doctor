@@ -1,7 +1,12 @@
 package com.petdoctor.domain.service;
 
+import com.petdoctor.data.entity.AppointmentEntity;
+import com.petdoctor.data.entity.AppointmentState;
+import com.petdoctor.data.entity.DoctorEntity;
 import com.petdoctor.data.entity.VetClinicEntity;
 import com.petdoctor.data.repository.VetClinicRepository;
+import com.petdoctor.domain.dto.AppointmentDto;
+import com.petdoctor.domain.dto.DoctorDto;
 import com.petdoctor.domain.dto.VetClinicDto;
 import com.petdoctor.domain.service.impl.VetClinicServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -10,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,5 +122,92 @@ public class VetClinicServiceTest {
     public void deleteVetClinicById() {
         vetClinicRepository.deleteById(1L);
         Mockito.verify(vetClinicRepository, Mockito.times(1)).deleteById(1L);
+    }
+
+    @Test
+    public void bookAppointment() {
+        var appointmentEntity = new AppointmentEntity(1L,
+                LocalDate.now(),
+                AppointmentState.OPEN,
+                null,
+                null);
+
+        var doctorEntity = new DoctorEntity(1L,
+                "Alex",
+                "Bosoc",
+                "genius@gmail.com",
+                2,
+                List.of(appointmentEntity),
+                null);
+
+        var vetClinicEntity = new VetClinicEntity(1L, "Kronva", "vet@gmail.com", new ArrayList<>(), List.of(doctorEntity));
+
+
+        Mockito.when(vetClinicRepository.getReferenceById(1L)).thenReturn(vetClinicEntity);
+        VetClinicDto vetClinicDto = vetClinicService.getVetClinicById(1L);
+
+        AppointmentState expectedAppointmentState = AppointmentState.TAKEN;
+
+
+        var doctorDto = new DoctorDto(1L,
+                "Alex",
+                "Bosoc",
+                "genius@gmail.com",
+                2,
+                new ArrayList<>());
+
+        var appointmentDto = new AppointmentDto(1L,
+                LocalDate.now(),
+                AppointmentState.OPEN,
+                null,
+                doctorDto,
+                vetClinicDto);
+
+        AppointmentDto bookedAppointmentDto = vetClinicService.bookAppointment(appointmentDto);
+
+        assertEquals(expectedAppointmentState, bookedAppointmentDto.getAppointmentState());
+    }
+
+    @Test
+    public void closeAppointment() {
+        var appointmentEntity = new AppointmentEntity(1L,
+                LocalDate.now(),
+                AppointmentState.OPEN,
+                null,
+                null);
+
+        var doctorEntity = new DoctorEntity(1L,
+                "Alex",
+                "Bosoc",
+                "genius@gmail.com",
+                2,
+                List.of(appointmentEntity),
+                null);
+
+        var vetClinicEntity = new VetClinicEntity(1L, "Kronva", "vet@gmail.com", new ArrayList<>(), List.of(doctorEntity));
+
+
+        Mockito.when(vetClinicRepository.getReferenceById(1L)).thenReturn(vetClinicEntity);
+        VetClinicDto vetClinicDto = vetClinicService.getVetClinicById(1L);
+
+        AppointmentState expectedAppointmentState = AppointmentState.CLOSED;
+
+        var doctorDto = new DoctorDto(1L,
+                "Alex",
+                "Bosoc",
+                "genius@gmail.com",
+                2,
+                new ArrayList<>());
+
+        var appointmentDto = new AppointmentDto(1L,
+                LocalDate.now(),
+                AppointmentState.OPEN,
+                null,
+                doctorDto,
+                vetClinicDto);
+
+        AppointmentDto bookedAppointmentDto = vetClinicService.closeAppointment(appointmentDto);
+
+        assertEquals(expectedAppointmentState, bookedAppointmentDto.getAppointmentState());
     }
 }

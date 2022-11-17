@@ -3,6 +3,8 @@ package com.petdoctor.domain.tool.mapper.impl;
 import com.petdoctor.data.entity.ClientEntity;
 import com.petdoctor.data.entity.DoctorEntity;
 import com.petdoctor.data.entity.VetClinicEntity;
+import com.petdoctor.domain.dto.ClientDto;
+import com.petdoctor.domain.dto.DoctorDto;
 import com.petdoctor.domain.dto.VetClinicDto;
 import com.petdoctor.domain.model.client.Client;
 import com.petdoctor.domain.model.client.ClientInterface;
@@ -49,7 +51,7 @@ public class VetClinicMapper extends AbstractMapper<VetClinicEntity, VetClinic, 
         }
         if (source.getDoctorEntities() != null) {
             HashMap<Long, DoctorInterface> hashMap = new HashMap<>();
-            source.getClientEntities().forEach(doctor -> hashMap.put(doctor.getId(), mapper.map(doctor, Doctor.class)));
+            source.getDoctorEntities().forEach(doctor -> hashMap.put(doctor.getId(), mapper.map(doctor, Doctor.class)));
             destination.setDoctors(hashMap);
         }
     }
@@ -68,6 +70,8 @@ public class VetClinicMapper extends AbstractMapper<VetClinicEntity, VetClinic, 
 
     @Override
     protected void mapSpecificFieldsToDtoFromModel(VetClinic source, VetClinicDto destination) {
+        source.getDoctors().values().forEach(a -> destination.getDoctors().add(mapper.map(a, DoctorDto.class)));
+        source.getClients().values().forEach(a -> destination.getClients().add(mapper.map(a, ClientDto.class)));
         // TODO: we are unable to change VetClinicDto special fields
     }
 

@@ -1,15 +1,21 @@
 package com.petdoctor.domain.service.impl;
 
+import com.petdoctor.data.entity.AppointmentEntity;
 import com.petdoctor.data.entity.VetClinicEntity;
 import com.petdoctor.data.repository.VetClinicRepository;
+import com.petdoctor.domain.dto.AppointmentDto;
 import com.petdoctor.domain.dto.ClientDto;
 import com.petdoctor.domain.dto.DoctorDto;
 import com.petdoctor.domain.dto.VetClinicDto;
+import com.petdoctor.domain.model.appointment.Appointment;
+import com.petdoctor.domain.model.appointment.AppointmentInfo;
 import com.petdoctor.domain.model.vet.clinic.VetClinic;
 import com.petdoctor.domain.model.vet.clinic.VetClinicInfo;
+import com.petdoctor.domain.model.vet.clinic.VetClinicInterface;
 import com.petdoctor.domain.service.VetClinicService;
 import com.petdoctor.domain.tool.exception.PetDoctorNotFoundException;
 import com.petdoctor.domain.tool.exception.PetDoctorNullException;
+import com.petdoctor.domain.tool.exception.PetDoctorValidationException;
 import com.petdoctor.domain.tool.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -23,12 +29,15 @@ import java.util.List;
 public class VetClinicServiceImpl implements VetClinicService {
     private final VetClinicRepository vetClinicRepository;
     private final Mapper<VetClinicEntity, VetClinic, VetClinicDto> vetClinicMapper;
+    private final Mapper<AppointmentEntity, Appointment, AppointmentDto> appointmentMapper;
 
     @Autowired
     public VetClinicServiceImpl(VetClinicRepository vetClinicRepository,
-                                Mapper<VetClinicEntity, VetClinic, VetClinicDto> vetClinicMapper) {
+                                Mapper<VetClinicEntity, VetClinic, VetClinicDto> vetClinicMapper,
+                                Mapper<AppointmentEntity, Appointment, AppointmentDto> appointmentMapper) {
         this.vetClinicRepository = vetClinicRepository;
         this.vetClinicMapper = vetClinicMapper;
+        this.appointmentMapper = appointmentMapper;
     }
 
     @Override
@@ -129,5 +138,42 @@ public class VetClinicServiceImpl implements VetClinicService {
         }
     }
 
-//    TODO: add book appointment
+    @Override
+    public AppointmentDto closeAppointment(AppointmentDto appointmentDto) {
+        AppointmentInfo appointmentInfo = appointmentMapper.toModelFromDto(appointmentDto);
+
+        if (appointmentInfo == null) {
+            throw new PetDoctorNullException("AppointmentInfo is null!");
+        }
+
+        if (!(appointmentInfo.getVetClinic() instanceof VetClinicInterface)) {
+            throw new PetDoctorValidationException("Incorrect type of AppointmentInfo was taken");
+        }
+
+        if (appointmentInfo.getVetClinic() == null) {
+            throw new PetDoctorNullException("Related vetClinic isn't exist");
+        }
+
+        return appointmentMapper.toDtoFromModel((Appointment) ((VetClinicInterface) appointmentInfo.getVetClinic()).closeAppointment(appointmentInfo));
+    }
+
+    @Override
+    public AppointmentDto bookAppointment(AppointmentDto appointmentDto) {
+        AppointmentInfo appointmentInfo = appointmentMapper.toModelFromDto(appointmentDto);
+
+        if (appointmentInfo == null) {
+            throw new PetDoctorNullException("AppointmentInfo is null!");
+        }
+
+        if (!(appointmentInfo.getVetClinic() instanceof VetClinicInterface)) {
+            throw new PetDoctorValidationException("Incorrect type of AppointmentInfo was taken");
+        }
+
+        if (appointmentInfo.getVetClinic() == null) {
+            throw new PetDoctorNullException("Related vetClinic isn't exist");
+        }
+
+        VetClinicInterface vetClinicInterface = ((VetClinicInterface) appointmentInfo.getVetClinic());
+        return appointmentMapper.toDtoFromModel((Appointment) vetClinicInterface.bookAppointment(appointmentInfo));
+    }
 }

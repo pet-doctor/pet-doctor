@@ -1,5 +1,6 @@
 package com.petdoctor.domain.service;
 
+import com.petdoctor.domain.dto.AppointmentDto;
 import com.petdoctor.domain.dto.VetClinicDto;
 
 import java.util.List;
@@ -33,4 +34,8 @@ public interface VetClinicService {
      * @param id VetClinic ID
      */
     void deleteVetClinicById(Long id);
+
+    AppointmentDto bookAppointment(AppointmentDto appointmentDto);
+
+    AppointmentDto closeAppointment(AppointmentDto appointmentDto);
 }
