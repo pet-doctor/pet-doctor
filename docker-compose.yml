@@ -5,10 +5,8 @@ services:
     container_name: petpostgres
     image: postgres
     ports:
-      - "5432:5432"
-    expose:
-      - 5432
+      - "5433:5432"
     environment:
-      POSTGRES_DB: pet
+      POSTGRES_DB: petdoctordb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1qaz2wsx
