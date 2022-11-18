@@ -1,14 +1,14 @@
 package com.petdoctor.domain.service.impl;
 
+import com.petdoctor.data.entity.AppointmentEntity;
+import com.petdoctor.data.entity.AppointmentState;
 import com.petdoctor.data.repository.AppointmentRepository;
 import com.petdoctor.domain.dto.AppointmentDto;
-import com.petdoctor.data.entity.AppointmentEntity;
 import com.petdoctor.domain.dto.ClientDto;
 import com.petdoctor.domain.dto.DoctorDto;
 import com.petdoctor.domain.dto.VetClinicDto;
 import com.petdoctor.domain.model.appointment.Appointment;
 import com.petdoctor.domain.model.appointment.AppointmentInfo;
-import com.petdoctor.data.entity.AppointmentState;
 import com.petdoctor.domain.service.AppointmentService;
 import com.petdoctor.domain.tool.exception.PetDoctorNotFoundException;
 import com.petdoctor.domain.tool.exception.PetDoctorNullException;
@@ -23,8 +23,8 @@ import java.util.List;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
-    private final AppointmentRepository appointmentRepository;
-    private final Mapper<AppointmentEntity, Appointment, AppointmentDto> appointmentMapper;
+    private AppointmentRepository appointmentRepository;
+    private Mapper<AppointmentEntity, Appointment, AppointmentDto> appointmentMapper;
 
     @Autowired
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository,
