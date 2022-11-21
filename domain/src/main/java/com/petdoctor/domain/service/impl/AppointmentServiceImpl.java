@@ -23,8 +23,8 @@ import java.util.List;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
-    private AppointmentRepository appointmentRepository;
-    private Mapper<AppointmentEntity, Appointment, AppointmentDto> appointmentMapper;
+    private final AppointmentRepository appointmentRepository;
+    private final Mapper<AppointmentEntity, Appointment, AppointmentDto> appointmentMapper;
 
     @Autowired
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository,

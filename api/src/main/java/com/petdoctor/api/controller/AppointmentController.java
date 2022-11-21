@@ -7,9 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-@RestController("/api/appointments")
+@RestController
+@RequestMapping("/api/appointments")
 public class AppointmentController {
-    private AppointmentService appointmentService;
+    private final AppointmentService appointmentService;
 
     @Autowired
     public AppointmentController(AppointmentService appointmentService) {
