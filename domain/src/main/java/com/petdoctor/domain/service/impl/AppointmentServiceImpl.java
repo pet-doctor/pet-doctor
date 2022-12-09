@@ -1,14 +1,14 @@
 package com.petdoctor.domain.service.impl;
 
+import com.petdoctor.data.entity.AppointmentEntity;
+import com.petdoctor.data.entity.AppointmentState;
 import com.petdoctor.data.repository.AppointmentRepository;
 import com.petdoctor.domain.dto.AppointmentDto;
-import com.petdoctor.data.entity.AppointmentEntity;
 import com.petdoctor.domain.dto.ClientDto;
 import com.petdoctor.domain.dto.DoctorDto;
 import com.petdoctor.domain.dto.VetClinicDto;
 import com.petdoctor.domain.model.appointment.Appointment;
 import com.petdoctor.domain.model.appointment.AppointmentInfo;
-import com.petdoctor.data.entity.AppointmentState;
 import com.petdoctor.domain.service.AppointmentService;
 import com.petdoctor.domain.tool.exception.PetDoctorNotFoundException;
 import com.petdoctor.domain.tool.exception.PetDoctorNullException;

@@ -2,6 +2,7 @@ package com.petdoctor.domain.service;
 
 
 import com.petdoctor.domain.dto.AppointmentDto;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
