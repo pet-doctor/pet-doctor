@@ -96,6 +96,9 @@ public class VetClinic implements VetClinicInterface {
             throw new PetDoctorNullException("AppointmentInfo is null!");
         }
 
+
+
+
         if (!(appointmentInfo.getDoctor() instanceof DoctorInterface)) {
             throw new PetDoctorValidationException("Incorrect type of AppointmentInfo was taken");
         }

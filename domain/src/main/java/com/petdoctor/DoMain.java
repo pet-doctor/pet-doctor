@@ -9,4 +9,3 @@ public class DoMain {
         SpringApplication.run(DoMain.class, args);
     }
 }
-
