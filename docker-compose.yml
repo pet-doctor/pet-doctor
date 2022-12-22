@@ -1,0 +1,12 @@
+version: "3.1"
+services:
+
+  postgresdb:
+    container_name: petpostgres
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: petdoctordb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1qaz2wsx
